@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SleepNet Prospect Pipeline | Fructify Solutions</title>
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #2C3E6B;
+  --hot: #dc3545;
+  --hot-bg: #FFD7D7;
+  --warm: #ffc107;
+  --warm-bg: #FFF3CD;
+  --cool: #28a745;
+  --cool-bg: #D4EDDA;
+  --blue-bg: #E8F0FE;
+  --verified: #C6EFCE;
+  --text: #333;
+  --border: #dee2e6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: var(--text); }
+.header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); color: white; padding: 2rem; text-align: center; }
+.header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.header p { opacity: 0.85; font-size: 1.1rem; }
+.stats-bar { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 1.5rem; background: white; border-bottom: 3px solid var(--navy); }
+.stat { text-align: center; }
+.stat .num { font-size: 2rem; font-weight: 700; color: var(--navy); }
+.stat .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+.tabs { display: flex; gap: 0; background: white; border-bottom: 2px solid var(--border); padding: 0 1rem; overflow-x: auto; }
+.tab { padding: 1rem 1.5rem; cursor: pointer; border-bottom: 3px solid transparent; font-weight: 500; white-space: nowrap; transition: all 0.2s; }
+.tab:hover { background: #f8f9fa; }
+.tab.active { border-bottom-color: var(--navy); color: var(--navy); font-weight: 700; }
+.content { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
+.panel { display: none; }
+.panel.active { display: block; }
+.search-bar { margin-bottom: 1rem; }
+.search-bar input { width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem; }
+.search-bar input:focus { outline: none; border-color: var(--navy); }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+th { background: var(--navy); color: white; padding: 0.75rem 0.5rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; cursor: pointer; }
+th:hover { background: var(--navy-light); }
+td { padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--border); font-size: 0.85rem; vertical-align: top; }
+tr:hover td { background: #f8f9fa; }
+.priority { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
+.priority.hot { background: var(--hot-bg); color: var(--hot); }
+.priority.warm { background: var(--warm-bg); color: #856404; }
+.priority.cool { background: var(--cool-bg); color: var(--cool); }
+.status { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+.status.enriched { background: var(--verified); color: #155724; }
+.status.research { background: var(--blue-bg); color: #1a56db; }
+.email-link { color: var(--navy); text-decoration: none; }
+.email-link:hover { text-decoration: underline; }
+.li-link { color: #0077b5; text-decoration: none; font-size: 0.8rem; }
+.li-link:hover { text-decoration: underline; }
+.phase { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+.phase.p1 { background: var(--hot-bg); color: var(--hot); }
+.phase.p2 { background: var(--warm-bg); color: #856404; }
+.phase.p3 { background: var(--cool-bg); color: var(--cool); }
+.vertical-card { background: white; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid var(--navy); }
+.vertical-card h3 { margin-bottom: 0.5rem; color: var(--navy); }
+.vertical-card .meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; font-size: 0.85rem; color: #666; }
+.vertical-card .meta span { display: flex; align-items: center; gap: 0.3rem; }
+.vertical-card .strategy { font-size: 0.9rem; margin-top: 0.5rem; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; }
+.vertical-card.growth { border-left-color: var(--hot); }
+.vertical-card.expansion { border-left-color: var(--warm); }
+.source-card { background: white; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 1rem; }
+.source-icon { width: 48px; height: 48px; border-radius: 8px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+.source-card .info h4 { margin-bottom: 0.25rem; }
+.source-card .info p { font-size: 0.85rem; color: #666; }
+.badge { display: inline-block; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.7rem; font-weight: 600; }
+.badge.complete { background: var(--verified); color: #155724; }
+.footer { text-align: center; padding: 2rem; color: #999; font-size: 0.85rem; }
+.footer a { color: var(--navy); }
+@media (max-width: 768px) {
+  .stats-bar { gap: 1rem; }
+  .stat .num { font-size: 1.4rem; }
+  table { font-size: 0.75rem; }
+  td, th { padding: 0.4rem 0.3rem; }
+  .content { padding: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SleepNet Prospect Pipeline</h1>
+  <p>Multi-Source Enriched Leads Across 12 Verticals</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="num">27</div><div class="label">Enriched Contacts</div></div>
+  <div class="stat"><div class="num">48</div><div class="label">Total Leads</div></div>
+  <div class="stat"><div class="num">12</div><div class="label">Verticals</div></div>
+  <div class="stat"><div class="num">20</div><div class="label">Companies Intel</div></div>
+  <div class="stat"><div class="num">28</div><div class="label">90-Day Actions</div></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPanel('contacts')">Enriched Contacts</div>
+  <div class="tab" onclick="showPanel('intel')">Business Intel</div>
+  <div class="tab" onclick="showPanel('leads')">Master Leads</div>
+  <div class="tab" onclick="showPanel('verticals')">Verticals</div>
+  <div class="tab" onclick="showPanel('actions')">90-Day Plan</div>
+  <div class="tab" onclick="showPanel('sources')">Data Sources</div>
+</div>
+
+<div class="content">
+
+<div class="panel active" id="contacts">
+<div class="search-bar"><input type="text" id="contactSearch" placeholder="Search contacts by name, company, vertical..." onkeyup="filterTable('contactsTable','contactSearch')"></div>
+<div style="overflow-x:auto;">
+<table id="contactsTable">
+<thead><tr>
+<th>#</th><th onclick="sortTable('contactsTable',1)">Name</th><th onclick="sortTable('contactsTable',2)">Title</th><th onclick="sortTable('contactsTable',3)">Company</th><th>Email</th><th>Phone</th><th>LinkedIn</th><th onclick="sortTable('contactsTable',7)">Vertical</th><th>Type</th><th onclick="sortTable('contactsTable',9)">Priority</th><th>Verified</th><th>Source</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>John Lipman</strong></td><td></td><td>SleepRes</td><td><a class="email-link" href="mailto:john.lipman@sleepres.com">john.lipman@sleepres.com</a></td><td>+1 615-921-2406</td><td><a class="li-link" href="https://linkedin.com/in/john-lipman-9130965" target="_blank">Profile</a></td><td>VA CPAP</td><td>Buyer</td><td><span class="priority hot">HOT</span></td><td><span class="badge complete">IcyPeas</span></td><td>Apollo+IcyPeas</td></tr>
+<tr><td>2</td><td><strong>Tony Ross</strong></td><td>Product Manager</td><td>SleepRes</td><td><a class="email-link" href="mailto:tony.ross@sleepres.com">tony.ross@sleepres.com</a></td><td>+1 615-921-2406</td><td><a class="li-link" href="https://linkedin.com/in/tony-ross-b3a1394b" target="_blank">Profile</a></td><td>VA CPAP</td><td>Buyer</td><td><span class="priority hot">HOT</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>3</td><td><strong>Daniel Newberry</strong></td><td>VP of Finance</td><td>SleepRes</td><td><a class="email-link" href="mailto:daniel.newberry@sleepres.com">daniel.newberry@sleepres.com</a></td><td>+1 615-921-2406</td><td><a class="li-link" href="https://linkedin.com/in/daniel-newberry-19a35745" target="_blank">Profile</a></td><td>VA CPAP</td><td>Buyer</td><td><span class="priority hot">HOT</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>4</td><td><strong>Garrett Schwab</strong></td><td>President and CEO</td><td>XII Medical</td><td><a class="email-link" href="mailto:gschwab@xiimedical.com">gschwab@xiimedical.com</a></td><td>+1 216-444-5802</td><td><a class="li-link" href="https://linkedin.com/in/garrett-schwab-05301b214" target="_blank">Profile</a></td><td>SBIR/STTR</td><td>Partner</td><td><span class="priority hot">HOT</span></td><td><span class="badge complete">IcyPeas</span></td><td>Apollo+IcyPeas</td></tr>
+<tr><td>5</td><td><strong>John Sam</strong></td><td>VP Operations</td><td>XII Medical</td><td><a class="email-link" href="mailto:john.sam@xiimedical.com">john.sam@xiimedical.com</a></td><td>+1 216-444-5802</td><td><a class="li-link" href="https://linkedin.com/in/john-sam-5647217" target="_blank">Profile</a></td><td>SBIR/STTR</td><td>Partner</td><td><span class="priority hot">HOT</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>6</td><td><strong>Mark Wong</strong></td><td>Dir. Mechanical Eng.</td><td>XII Medical</td><td><a class="email-link" href="mailto:mark.wong@xiimedical.com">mark.wong@xiimedical.com</a></td><td>+1 216-444-5802</td><td><a class="li-link" href="https://linkedin.com/in/markswong" target="_blank">Profile</a></td><td>SBIR/STTR</td><td>Partner</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>7</td><td><strong>Shaun Ooi</strong></td><td>Dir. Quality and Regulatory</td><td>XII Medical</td><td><a class="email-link" href="mailto:shaun.ooi@xiimedical.com">shaun.ooi@xiimedical.com</a></td><td>+1 216-444-5802</td><td><a class="li-link" href="https://linkedin.com/in/shaunooi" target="_blank">Profile</a></td><td>SBIR/STTR</td><td>Partner</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>8</td><td><strong>Caglar Oner</strong></td><td>VP Engineering</td><td>Eight Sleep</td><td><a class="email-link" href="mailto:caglar@eightsleep.com">caglar@eightsleep.com</a></td><td>+1 888-699-4015</td><td><a class="li-link" href="https://linkedin.com/in/caglaroner" target="_blank">Profile</a></td><td>Contract Mfg</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>9</td><td><strong>Joe Aranda</strong></td><td>VP Operations</td><td>Eight Sleep</td><td><a class="email-link" href="mailto:joe@eightsleep.com">joe@eightsleep.com</a></td><td>+1 888-699-4015</td><td><a class="li-link" href="https://linkedin.com/in/joe-aranda-7bab0028" target="_blank">Profile</a></td><td>Contract Mfg</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>10</td><td><strong>Kirk Huntsman</strong></td><td>Chairman and CEO</td><td>Vivos Therapeutics</td><td><a class="email-link" href="mailto:kirk@vivoslife.com">kirk@vivoslife.com</a></td><td>+1 720-399-9322</td><td><a class="li-link" href="https://linkedin.com/in/kirkhuntsman" target="_blank">Profile</a></td><td>VA CPAP</td><td>Partner</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>11</td><td><strong>Jake Phillips</strong></td><td>Dir. Reality Labs Accessories</td><td>Meta</td><td><a class="email-link" href="mailto:jakephillips@fb.com">jakephillips@fb.com</a></td><td>+1 650-543-4800</td><td><a class="li-link" href="https://linkedin.com/in/jacobphillips" target="_blank">Profile</a></td><td>VR/AR</td><td>Buyer</td><td><span class="priority hot">HOT</span></td><td><span class="badge complete">IcyPeas</span></td><td>Apollo+IcyPeas</td></tr>
+<tr><td>12</td><td><strong>Dinesh Chand</strong></td><td>Sr. Dir. Partnerships</td><td>Meta</td><td><a class="email-link" href="mailto:dineshchand@fb.com">dineshchand@fb.com</a></td><td>+1 650-543-4800</td><td><a class="li-link" href="https://linkedin.com/in/dineshchand" target="_blank">Profile</a></td><td>VR/AR</td><td>Buyer</td><td><span class="priority hot">HOT</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>13</td><td><strong>Amanda Chen</strong></td><td>Sr. Dir. Product, VR</td><td>Meta</td><td><a class="email-link" href="mailto:amandac@meta.com">amandac@meta.com</a></td><td>+1 650-543-4800</td><td><a class="li-link" href="https://linkedin.com/in/amanda-chen-69738773" target="_blank">Profile</a></td><td>VR/AR</td><td>Buyer</td><td><span class="priority hot">HOT</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>14</td><td><strong>Darrell Tullis</strong></td><td>VP Sales Ops and Biz Dev</td><td>Smith Optics</td><td><a class="email-link" href="mailto:darrell.tullis@smithoptics.com">darrell.tullis@smithoptics.com</a></td><td>+1 888-206-2995</td><td><a class="li-link" href="https://linkedin.com/in/darrell-tullis-352535b" target="_blank">Profile</a></td><td>Sports Eyewear</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>15</td><td><strong>Scott Randall</strong></td><td>VP Global Product</td><td>Smith Optics</td><td><a class="email-link" href="mailto:scott@smithoptics.com">scott@smithoptics.com</a></td><td>+1 888-206-2995</td><td><a class="li-link" href="https://linkedin.com/in/scott-randall-b2a5464b" target="_blank">Profile</a></td><td>Sports Eyewear</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>16</td><td><strong>Tom Short</strong></td><td>SVP Global Defense</td><td>Gentex Corp.</td><td><a class="email-link" href="mailto:tshort@gentexcorp.com">tshort@gentexcorp.com</a></td><td>+1 570-282-3550</td><td><a class="li-link" href="https://linkedin.com/in/tomshort91" target="_blank">Profile</a></td><td>Firefighting</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>17</td><td><strong>Sean Coffey</strong></td><td>Biz Dev Manager</td><td>Gentex Corp.</td><td><a class="email-link" href="mailto:scoffey@gentexcorp.com">scoffey@gentexcorp.com</a></td><td>+1 570-282-3550</td><td><a class="li-link" href="https://linkedin.com/in/sean-coffey-9347a3b" target="_blank">Profile</a></td><td>Firefighting</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>18</td><td><strong>Chris Hudson</strong></td><td>CEO and President</td><td>Comply</td><td><a class="email-link" href="mailto:chudson@complyfoam.com">chudson@complyfoam.com</a></td><td>+1 651-739-9427</td><td><a class="li-link" href="https://linkedin.com/in/chrishudson896" target="_blank">Profile</a></td><td>Earbuds</td><td>Partner</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>19</td><td><strong>Doug Till</strong></td><td>Dir. Biz Dev</td><td>Comply</td><td><a class="email-link" href="mailto:dtill@complyfoam.com">dtill@complyfoam.com</a></td><td>+1 651-739-9427</td><td><a class="li-link" href="https://linkedin.com/in/doug-till-930b15a" target="_blank">Profile</a></td><td>Earbuds</td><td>Partner</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>20</td><td><strong>Laurence Newman</strong></td><td>Founder/CEO</td><td>CurrentBody</td><td><a class="email-link" href="mailto:laurence@currentbody.com">laurence@currentbody.com</a></td><td>+44 161 333 4447</td><td><a class="li-link" href="https://linkedin.com/in/laurence-newman-66a34919" target="_blank">Profile</a></td><td>Health and Beauty</td><td>Partner</td><td><span class="priority cool">LONG</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>21</td><td><strong>Dustin Levy</strong></td><td>VP Industrial</td><td>Gentex Corp.</td><td><a class="email-link" href="mailto:dlevy@gentexcorp.com">dlevy@gentexcorp.com</a></td><td>+1 570-282-3550</td><td><a class="li-link" href="https://linkedin.com/in/dustinlevy" target="_blank">Profile</a></td><td>Welding</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>22</td><td><strong>Jeff Wardyga</strong></td><td>Dir. Operations</td><td>Gentex Corp.</td><td><a class="email-link" href="mailto:jwardyga@gentexcorp.com">jwardyga@gentexcorp.com</a></td><td>+1 570-282-3550</td><td><a class="li-link" href="https://linkedin.com/in/jeff-wardyga-7a203b6b" target="_blank">Profile</a></td><td>Firefighting</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>23</td><td><strong>Mark Wilson</strong></td><td>Dir. Sales N. America</td><td>Gentex Corp.</td><td><a class="email-link" href="mailto:mwilson@gentexcorp.com">mwilson@gentexcorp.com</a></td><td>+1 570-282-3550</td><td><a class="li-link" href="https://linkedin.com/in/mark-wilson-55354814" target="_blank">Profile</a></td><td>Aviation</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>24</td><td><strong>Chris Borneo</strong></td><td>Dir. MSA+ and Gas Detection</td><td>MSA Safety</td><td><a class="email-link" href="mailto:chris.borneo@msasafety.com">chris.borneo@msasafety.com</a></td><td>+1 800-672-2222</td><td><a class="li-link" href="https://linkedin.com/in/chrisborneo" target="_blank">Profile</a></td><td>Firefighting</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>25</td><td><strong>Ricardo Schiavoni</strong></td><td>Global Dir. VAVE</td><td>MSA Safety</td><td><a class="email-link" href="mailto:ricardo.schiavoni@msasafety.com">ricardo.schiavoni@msasafety.com</a></td><td>+1 800-672-2222</td><td><a class="li-link" href="https://linkedin.com/in/ricardo-schiavoni-805a061a" target="_blank">Profile</a></td><td>Firefighting</td><td>Buyer</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>26</td><td><strong>Monty Sharma</strong></td><td>CEO and President</td><td>Therabody</td><td><a class="email-link" href="mailto:monty.sharma@therabodycorp.com">monty.sharma@therabodycorp.com</a></td><td>+1 310-773-5830</td><td><a class="li-link" href="https://linkedin.com/in/monty-sharma-206793bb" target="_blank">Profile</a></td><td>Health and Beauty</td><td>Buyer</td><td><span class="priority cool">LONG</span></td><td>Apollo</td><td>Apollo</td></tr>
+<tr><td>27</td><td><strong>Bob Oliveira</strong></td><td>Founder/CEO (PhD)</td><td>Comply</td><td><a class="email-link" href="mailto:boliveira@complyfoam.com">boliveira@complyfoam.com</a></td><td>+1 651-739-9427</td><td><a class="li-link" href="https://linkedin.com/in/bob-oliveira-ph-d-b3a06310" target="_blank">Profile</a></td><td>Earbuds</td><td>Partner</td><td><span class="priority warm">WARM</span></td><td>Apollo</td><td>Apollo</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="panel" id="intel">
+<div class="search-bar"><input type="text" id="intelSearch" placeholder="Search companies..." onkeyup="filterTable('intelTable','intelSearch')"></div>
+<div style="overflow-x:auto;">
+<table id="intelTable">
+<thead><tr>
+<th>#</th><th onclick="sortTable('intelTable',1)">Company</th><th>Vertical</th><th>Revenue</th><th>Employees</th><th>Funding</th><th>Latest Round</th><th>Key Investors</th><th>Strategic Intel</th><th>Ticker</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>SleepRes</strong></td><td>VA CPAP</td><td>$10-50M</td><td>51-200</td><td>Undisclosed</td><td>Private</td><td>-</td><td>VA sole-source CPAP supplier; ideal for AIR gel mask integration</td><td></td></tr>
+<tr><td>2</td><td><strong>XII Medical</strong></td><td>SBIR/STTR</td><td>$10-50M</td><td>51-200</td><td>$75M</td><td>Series B ($45M)</td><td>Omega Funds, Intuitive Ventures, Cleveland Clinic</td><td>Well-funded medtech; Cleveland Clinic backing = clinical validation</td><td></td></tr>
+<tr><td>3</td><td><strong>Eight Sleep</strong></td><td>Contract Mfg</td><td>$50-200M</td><td>201-500</td><td>$162M</td><td>Series C ($86M)</td><td>Valor Equity, Khosla, Founders Fund</td><td>Premium sleep tech; seeking innovative materials</td><td></td></tr>
+<tr><td>4</td><td><strong>Vivos Therapeutics</strong></td><td>VA CPAP</td><td>$10-50M</td><td>51-200</td><td>$28M</td><td>IPO</td><td>Public</td><td>CPAP alternative; dental sleep network access</td><td>VVOS</td></tr>
+<tr><td>5</td><td><strong>Meta (Reality Labs)</strong></td><td>VR/AR</td><td>$134B+</td><td>80,000+</td><td>Public</td><td>-</td><td>Public</td><td>$15B+/yr in VR/AR; comfort = top complaint</td><td>META</td></tr>
+<tr><td>6</td><td><strong>Smith Optics</strong></td><td>Sports Eyewear</td><td>$75-200M</td><td>201-500</td><td>Subsidiary</td><td>Acquired</td><td>Safilo Group (parent)</td><td>Premium goggles; Safilo = global distribution</td><td></td></tr>
+<tr><td>7</td><td><strong>Gentex Corp.</strong></td><td>Fire/Aviation/Welding</td><td>$200-500M</td><td>1,001-5,000</td><td>Established</td><td>-</td><td>Private (family)</td><td>Global PPE leader; multi-vertical entry point</td><td></td></tr>
+<tr><td>8</td><td><strong>MSA Safety</strong></td><td>Firefighting</td><td>$1.8B</td><td>5,000+</td><td>Public</td><td>-</td><td>Public</td><td>10-K: R&D focus on next-gen respiratory</td><td>MSA</td></tr>
+<tr><td>9</td><td><strong>Comply</strong></td><td>Earbuds</td><td>$10-50M</td><td>51-200</td><td>Private</td><td>-</td><td>Private</td><td>Market leader foam tips; AIR gel could replace foam</td><td></td></tr>
+<tr><td>10</td><td><strong>CurrentBody</strong></td><td>Health and Beauty</td><td>$50-200M</td><td>201-500</td><td>Private</td><td>-</td><td>Private</td><td>Leading beauty device retailer; channel partner</td><td></td></tr>
+<tr><td>11</td><td><strong>Therabody</strong></td><td>Health and Beauty</td><td>$200-500M</td><td>501-1,000</td><td>$165M+</td><td>Series B</td><td>-</td><td>Expanding into recovery tech; thermal therapy fit</td><td></td></tr>
+<tr><td>12</td><td><strong>Lincoln Electric</strong></td><td>Welding</td><td>$3.7B</td><td>10,000+</td><td>Public</td><td>-</td><td>Public</td><td>World leader welding PPE; massive volume</td><td>LECO</td></tr>
+<tr><td>13</td><td><strong>3M (Scott Safety)</strong></td><td>Fire/Anti-Pollution</td><td>$32B+</td><td>85,000+</td><td>Public</td><td>-</td><td>Public</td><td>SCBA division; licensing play for seals</td><td>MMM</td></tr>
+<tr><td>14</td><td><strong>Honeywell Safety</strong></td><td>Anti-Pollution</td><td>$36B+</td><td>95,000+</td><td>Public</td><td>-</td><td>Public</td><td>Major respirator mfg; face seal licensing volume</td><td>HON</td></tr>
+<tr><td>15</td><td><strong>Oakley (EssilorLuxottica)</strong></td><td>Sports Eyewear</td><td>$25B+ (parent)</td><td>190,000+</td><td>Subsidiary</td><td>-</td><td>EssilorLuxottica</td><td>Largest eyewear company globally; scale play</td><td>EL.PA</td></tr>
+<tr><td>16</td><td><strong>PetFusion/PetSafe</strong></td><td>Pet Respiratory</td><td>$50-200M</td><td>201-500</td><td>-</td><td>-</td><td>-</td><td>Premium pet wellness; brachycephalic breathing aids</td><td></td></tr>
+<tr><td>17</td><td><strong>David Clark Company</strong></td><td>Aviation Oxygen</td><td>$50-200M</td><td>201-500</td><td>Private</td><td>-</td><td>Private (family)</td><td>Aviation headset/mask leader; O2 mask seals</td><td></td></tr>
+<tr><td>18</td><td><strong>Miller Electric (ITW)</strong></td><td>Welding</td><td>$15B+ (parent)</td><td>45,000+</td><td>Subsidiary</td><td>-</td><td>Illinois Tool Works</td><td>Major welding helmet brand; comfort upgrade</td><td>ITW</td></tr>
+<tr><td>19</td><td><strong>RZ Mask</strong></td><td>Anti-Pollution</td><td>$5-10M</td><td>11-50</td><td>-</td><td>-</td><td>-</td><td>Premium consumer masks; face seal upgrade</td><td></td></tr>
+<tr><td>20</td><td><strong>Cambridge Mask Co.</strong></td><td>Anti-Pollution</td><td>$5-10M</td><td>11-50</td><td>-</td><td>-</td><td>-</td><td>Military-grade consumer masks; UK market entry</td><td></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="panel" id="leads">
+<div class="search-bar"><input type="text" id="leadsSearch" placeholder="Search leads by name, company, vertical, priority..." onkeyup="filterTable('leadsTable','leadsSearch')"></div>
+<div style="overflow-x:auto;">
+<table id="leadsTable">
+<thead><tr>
+<th>#</th><th onclick="sortTable('leadsTable',1)">Priority</th><th onclick="sortTable('leadsTable',2)">Vertical</th><th onclick="sortTable('leadsTable',3)">Company</th><th>Contact</th><th>Title</th><th>Email</th><th>Type</th><th>Rationale</th><th>Status</th>
+</tr></thead>
+<tbody id="leadsBody"></tbody>
+</table>
+</div>
+</div>
+
+<div class="panel" id="verticals" style="display:none;">
+<div id="verticalCards"></div>
+</div>
+
+<div class="panel" id="actions">
+<div class="search-bar"><input type="text" id="actionsSearch" placeholder="Search actions..." onkeyup="filterTable('actionsTable','actionsSearch')"></div>
+<div style="overflow-x:auto;">
+<table id="actionsTable">
+<thead><tr>
+<th>#</th><th onclick="sortTable('actionsTable',1)">Phase</th><th>Action</th><th onclick="sortTable('actionsTable',3)">Company</th><th>Contact</th><th>Email</th><th>Vertical</th><th>Deliverable</th>
+</tr></thead>
+<tbody id="actionsBody"></tbody>
+</table>
+</div>
+</div>
+
+<div class="panel" id="sources">
+<div id="sourceCards"></div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>Prepared by <a href="https://fructifyme.com" target="_blank">Fructify Solutions</a> for SleepNet Corporation - April 2026</p>
+  <p style="margin-top:0.5rem;">Multi-source enrichment: Apollo - Explorium - IcyPeas - Clay - Web Research</p>
+</div>
+
+<script>
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+function filterTable(tableId, inputId) {
+  const filter = document.getElementById(inputId).value.toLowerCase();
+  const rows = document.getElementById(tableId).querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(filter) ? '' : 'none';
+  });
+}
+let sortDir = {};
+function sortTable(tableId, colIdx) {
+  const table = document.getElementById(tableId);
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const key = tableId + colIdx;
+  sortDir[key] = !sortDir[key];
+  rows.sort((a, b) => {
+    const aText = a.cells[colIdx]?.textContent || '';
+    const bText = b.cells[colIdx]?.textContent || '';
+    return sortDir[key] ? aText.localeCompare(bText) : bText.localeCompare(aText);
+  });
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+const leads = [
+  ['HOT','VR/AR','Meta','Jake Phillips','Dir. Reality Labs Accessories','jakephillips@fb.com','Buyer','Lead accessor team for Quest headsets','Enriched'],
+  ['HOT','VR/AR','Meta','Dinesh Chand','Sr. Dir. Partnerships','dineshchand@fb.com','Buyer','Partnership lead for Reality Labs','Enriched'],
+  ['HOT','VR/AR','Meta','Amanda Chen','Sr. Dir. Product, VR','amandac@meta.com','Buyer','Product decision maker; comfort drives NPS','Enriched'],
+  ['WARM','VR/AR','Apple (Vision Pro)','','','','Buyer','Vision Pro light seal upgrade path','Research'],
+  ['WARM','VR/AR','Sony (PSVR2)','','','','Buyer','PSVR2 comfort complaints','Research'],
+  ['HOT','VA CPAP','SleepRes','John Lipman','','john.lipman@sleepres.com','Buyer','VA sole-source CPAP supplier','Enriched'],
+  ['HOT','VA CPAP','SleepRes','Tony Ross','Product Manager','tony.ross@sleepres.com','Buyer','Product decisions for VA CPAP masks','Enriched'],
+  ['HOT','VA CPAP','SleepRes','Daniel Newberry','VP Finance','daniel.newberry@sleepres.com','Buyer','Budget authority','Enriched'],
+  ['WARM','VA CPAP','Vivos','Kirk Huntsman','Chairman and CEO','kirk@vivoslife.com','Partner','CPAP alternative; dental network','Enriched'],
+  ['WARM','VA CPAP','ResMed','','','','Buyer','Market leader CPAP','Research'],
+  ['WARM','VA CPAP','Philips Respironics','','','','Buyer','Post-recall; seeking innovation','Research'],
+  ['HOT','SBIR/STTR','XII Medical','Garrett Schwab','President and CEO','gschwab@xiimedical.com','Partner','$75M funded; SBIR co-applicant','Enriched'],
+  ['HOT','SBIR/STTR','XII Medical','John Sam','VP Operations','john.sam@xiimedical.com','Partner','Device integration eval','Enriched'],
+  ['WARM','SBIR/STTR','XII Medical','Mark Wong','Dir. Mechanical Eng.','mark.wong@xiimedical.com','Partner','Technical evaluation','Enriched'],
+  ['WARM','SBIR/STTR','XII Medical','Shaun Ooi','Dir. Quality and Reg.','shaun.ooi@xiimedical.com','Partner','Regulatory pathway','Enriched'],
+  ['WARM','Contract Mfg','Eight Sleep','Caglar Oner','VP Engineering','caglar@eightsleep.com','Buyer','$162M funded; thermal comfort tech','Enriched'],
+  ['WARM','Contract Mfg','Eight Sleep','Joe Aranda','VP Operations','joe@eightsleep.com','Buyer','Supply chain integration','Enriched'],
+  ['LONG','Contract Mfg','Casper / Purple','','','','Buyer','Advanced materials for mattresses','Research'],
+  ['WARM','Sports Eyewear','Smith Optics','Darrell Tullis','VP Sales Ops','darrell.tullis@smithoptics.com','Buyer','Goggle foam replacement','Enriched'],
+  ['WARM','Sports Eyewear','Smith Optics','Scott Randall','VP Global Product','scott@smithoptics.com','Buyer','Product innovation','Enriched'],
+  ['LONG','Sports Eyewear','Oakley','','','','Buyer','Massive scale via EssilorLuxottica','Research'],
+  ['LONG','Sports Eyewear','POC Sports','','','','Buyer','Innovation-forward test partner','Research'],
+  ['WARM','Firefighting','Gentex','Tom Short','SVP Global Defense','tshort@gentexcorp.com','Buyer','SCBA mask seal and helmet padding','Enriched'],
+  ['WARM','Firefighting','Gentex','Sean Coffey','Biz Dev Manager','scoffey@gentexcorp.com','Buyer','Champion new material adoption','Enriched'],
+  ['WARM','Firefighting','Gentex','Jeff Wardyga','Dir. Operations','jwardyga@gentexcorp.com','Buyer','Integration feasibility','Enriched'],
+  ['WARM','Firefighting','MSA Safety','Chris Borneo','Dir. MSA+','chris.borneo@msasafety.com','Buyer','$1.8B co; next-gen respiratory','Enriched'],
+  ['WARM','Firefighting','MSA Safety','Ricardo Schiavoni','Global Dir. VAVE','ricardo.schiavoni@msasafety.com','Buyer','Cost optimization','Enriched'],
+  ['LONG','Firefighting','3M (Scott Safety)','','','','Buyer','Licensing play; massive SCBA volume','Research'],
+  ['WARM','Earbuds','Comply','Chris Hudson','CEO and President','chudson@complyfoam.com','Partner','Foam tip maker; could displace foam','Enriched'],
+  ['WARM','Earbuds','Comply','Doug Till','Dir. Biz Dev','dtill@complyfoam.com','Partner','Partnership / licensing discussion','Enriched'],
+  ['WARM','Earbuds','Comply','Bob Oliveira','Founder/CEO (PhD)','boliveira@complyfoam.com','Partner','Technical credibility for evaluation','Enriched'],
+  ['LONG','Earbuds','Bose','','','','Buyer','Premium audio; noise isolation','Research'],
+  ['LONG','Earbuds','Sony Audio','','','','Buyer','WF-1000XM series; huge volume','Research'],
+  ['LONG','Pet Respiratory','PetFusion','','','','Buyer','Brachycephalic breathing aids','Research'],
+  ['LONG','Pet Respiratory','PetSafe','','','','Partner','Distribution channel','Research'],
+  ['LONG','Health and Beauty','CurrentBody','Laurence Newman','Founder/CEO','laurence@currentbody.com','Partner','Beauty device channel','Enriched'],
+  ['LONG','Health and Beauty','Therabody','Monty Sharma','CEO and President','monty.sharma@therabodycorp.com','Buyer','Thermal recovery','Enriched'],
+  ['LONG','Health and Beauty','FOREO','','','','Partner','Facial device interfaces','Research'],
+  ['WARM','Aviation','Gentex','Mark Wilson','Dir. Sales N. America','mwilson@gentexcorp.com','Buyer','Oxygen mask face seal','Enriched'],
+  ['LONG','Aviation','David Clark Co.','','','','Buyer','Aviation mask/headset maker','Research'],
+  ['LONG','Aviation','Gentex (Flight)','Dustin Levy','VP Industrial','dlevy@gentexcorp.com','Buyer','Cross-division opportunity','Enriched'],
+  ['LONG','Anti-Pollution','RZ Mask','','','','Buyer','Consumer mask face seal','Research'],
+  ['LONG','Anti-Pollution','Cambridge Mask','','','','Buyer','Military-grade; UK entry','Research'],
+  ['LONG','Anti-Pollution','Honeywell','','','','Buyer','Massive respirator volume','Research'],
+  ['WARM','Welding','Gentex','Dustin Levy','VP Industrial','dlevy@gentexcorp.com','Buyer','Welding helmet padding','Enriched'],
+  ['LONG','Welding','Lincoln Electric','','','','Buyer','$3.7B; world leader','Research'],
+  ['LONG','Welding','Miller Electric (ITW)','','','','Buyer','Major welding helmet brand','Research'],
+  ['LONG','Welding','3M Speedglas','','','','Buyer','Premium auto-darkening helmets','Research'],
+];
+const leadsBody = document.getElementById('leadsBody');
+leads.forEach((l, i) => {
+  const pClass = l[0]==='HOT'?'hot':l[0]==='WARM'?'warm':'cool';
+  const sClass = l[8]==='Enriched'?'enriched':'research';
+  const emailCell = l[5] ? '<a class="email-link" href="mailto:'+l[5]+'">'+l[5]+'</a>' : '';
+  leadsBody.innerHTML += '<tr><td>'+(i+1)+'</td><td><span class="priority '+pClass+'">'+l[0]+'</span></td><td>'+l[1]+'</td><td><strong>'+l[2]+'</strong></td><td>'+l[3]+'</td><td>'+l[4]+'</td><td>'+emailCell+'</td><td>'+l[6]+'</td><td>'+l[7]+'</td><td><span class="status '+sClass+'">'+l[8]+'</span></td></tr>';
+});
+
+const verticals = [
+  {name:'VR/AR Interfaces',tier:'Growth',cos:'Meta, Apple, Sony',enriched:3,total:5,rev:'$2-5M/yr',time:'6-12 mo',strategy:'Product sample to Jake Phillips at Meta then pilot with Quest accessories',contact:'Jake Phillips (Meta)'},
+  {name:'VA CPAP Program',tier:'Growth',cos:'SleepRes, Vivos, ResMed, Philips',enriched:4,total:6,rev:'$5-15M/yr',time:'3-6 mo',strategy:'Direct outreach to SleepRes (VA supplier) with mask samples',contact:'John Lipman (SleepRes)'},
+  {name:'SBIR/STTR Grants',tier:'Growth',cos:'XII Medical',enriched:4,total:4,rev:'$1-3M grants',time:'6-12 mo',strategy:'Joint SBIR/STTR application with XII Medical for DoD/NIH funding',contact:'Garrett Schwab (XII Medical)'},
+  {name:'Contract Manufacturing',tier:'Growth',cos:'Eight Sleep, Casper, Purple',enriched:2,total:3,rev:'$3-10M/yr',time:'6-18 mo',strategy:'Samples for Eight Sleep thermal comfort R&D',contact:'Caglar Oner (Eight Sleep)'},
+  {name:'Sports Eyewear',tier:'Expansion',cos:'Smith Optics, Oakley, POC',enriched:2,total:4,rev:'$1-5M/yr',time:'12-18 mo',strategy:'Goggle foam replacement pitch to Smith Optics biz dev',contact:'Darrell Tullis (Smith Optics)'},
+  {name:'Firefighting',tier:'Expansion',cos:'Gentex, MSA Safety, 3M',enriched:5,total:6,rev:'$5-20M/yr',time:'12-24 mo',strategy:'SCBA face seal samples to Gentex + MSA Safety',contact:'Tom Short (Gentex)'},
+  {name:'Premium Earbuds',tier:'Expansion',cos:'Comply, Bose, Sony',enriched:3,total:5,rev:'$2-8M/yr',time:'12-18 mo',strategy:'Material comparison pitch to Comply',contact:'Chris Hudson (Comply)'},
+  {name:'Pet Respiratory',tier:'Expansion',cos:'PetFusion, PetSafe',enriched:0,total:2,rev:'$500K-2M/yr',time:'18-24 mo',strategy:'Prototype brachycephalic breathing aid then vet channel',contact:'TBD'},
+  {name:'Health and Beauty',tier:'Expansion',cos:'CurrentBody, Therabody, FOREO',enriched:2,total:3,rev:'$1-5M/yr',time:'18-24 mo',strategy:'Skincare delivery device concept to CurrentBody',contact:'Laurence Newman (CurrentBody)'},
+  {name:'Aviation Oxygen',tier:'Expansion',cos:'Gentex, David Clark',enriched:2,total:3,rev:'$2-8M/yr',time:'12-24 mo',strategy:'Oxygen mask face seal samples to Gentex aviation division',contact:'Mark Wilson (Gentex)'},
+  {name:'Anti-Pollution',tier:'Expansion',cos:'RZ Mask, Cambridge Mask, Honeywell',enriched:0,total:3,rev:'$1-5M/yr',time:'18-24 mo',strategy:'Consumer mask face seal upgrade pitch to RZ Mask',contact:'TBD'},
+  {name:'Welding',tier:'Expansion',cos:'Gentex, Lincoln Electric, Miller, 3M',enriched:1,total:4,rev:'$2-10M/yr',time:'12-24 mo',strategy:'Welding helmet padding samples to Gentex Industrial VP',contact:'Dustin Levy (Gentex)'},
+];
+const vc = document.getElementById('verticalCards');
+verticals.forEach(v => {
+  vc.innerHTML += '<div class="vertical-card '+v.tier.toLowerCase()+'"><h3>'+v.name+' <span style="font-size:0.8rem;font-weight:400;color:#666;">('+v.tier+')</span></h3><div class="meta"><span>Target: '+v.cos+'</span><span>'+v.enriched+' enriched / '+v.total+' total</span><span>'+v.rev+'</span><span>'+v.time+'</span></div><div class="strategy"><strong>Entry Strategy:</strong> '+v.strategy+'</div><div style="margin-top:0.4rem;font-size:0.85rem;"><strong>Key Contact:</strong> '+v.contact+'</div></div>';
+});
+
+const actions = [
+  ['Days 1-30','Send mask samples + intro email','SleepRes','John Lipman','john.lipman@sleepres.com','VA CPAP','Sample kit + product brief'],
+  ['Days 1-30','Follow up with product deep-dive call','SleepRes','Tony Ross','tony.ross@sleepres.com','VA CPAP','Technical spec sheet'],
+  ['Days 1-30','Send VR facial interface concept + samples','Meta','Jake Phillips','jakephillips@fb.com','VR/AR','Concept brief + sample'],
+  ['Days 1-30','Reach out for partnerships call','Meta','Dinesh Chand','dineshchand@fb.com','VR/AR','Partnership proposal'],
+  ['Days 1-30','Propose joint SBIR/STTR application','XII Medical','Garrett Schwab','gschwab@xiimedical.com','SBIR/STTR','Joint application concept'],
+  ['Days 1-30','Technical evaluation call','XII Medical','John Sam','john.sam@xiimedical.com','SBIR/STTR','Technical data sheet'],
+  ['Days 1-30','Intro email + material science pitch','Eight Sleep','Caglar Oner','caglar@eightsleep.com','Contract Mfg','Thermal properties data'],
+  ['Days 1-30','Financial discussion - supply terms','SleepRes','Daniel Newberry','daniel.newberry@sleepres.com','VA CPAP','Pricing sheet'],
+  ['Days 1-30','CPAP alternative therapy pitch','Vivos','Kirk Huntsman','kirk@vivoslife.com','VA CPAP','Partnership brief'],
+  ['Days 31-60','Goggle foam replacement sample','Smith Optics','Darrell Tullis','darrell.tullis@smithoptics.com','Sports Eyewear','Foam comparison data'],
+  ['Days 31-60','Product innovation pitch','Smith Optics','Scott Randall','scott@smithoptics.com','Sports Eyewear','Product concept deck'],
+  ['Days 31-60','SCBA face seal sample','Gentex','Tom Short','tshort@gentexcorp.com','Firefighting','Sample + spec sheet'],
+  ['Days 31-60','Pilot structure discussion','Gentex','Sean Coffey','scoffey@gentexcorp.com','Firefighting','Pilot proposal'],
+  ['Days 31-60','Manufacturing feasibility','Gentex','Jeff Wardyga','jwardyga@gentexcorp.com','Firefighting','Integration assessment'],
+  ['Days 31-60','Welding helmet padding sample','Gentex','Dustin Levy','dlevy@gentexcorp.com','Welding','Comfort comparison'],
+  ['Days 31-60','Next-gen respiratory pitch','MSA Safety','Chris Borneo','chris.borneo@msasafety.com','Firefighting','R&D brief'],
+  ['Days 31-60','Cost optimization pitch','MSA Safety','Ricardo Schiavoni','ricardo.schiavoni@msasafety.com','Firefighting','Cost comparison model'],
+  ['Days 31-60','Foam tip replacement pitch','Comply','Chris Hudson','chudson@complyfoam.com','Earbuds','Material comparison'],
+  ['Days 31-60','Partnership/licensing discussion','Comply','Doug Till','dtill@complyfoam.com','Earbuds','Licensing framework'],
+  ['Days 31-60','Technical evaluation (PhD-level)','Comply','Bob Oliveira','boliveira@complyfoam.com','Earbuds','Technical white paper'],
+  ['Days 61-90','Aviation O2 mask seal concept','Gentex','Mark Wilson','mwilson@gentexcorp.com','Aviation','Aviation product concept'],
+  ['Days 61-90','Beauty device interface concept','CurrentBody','Laurence Newman','laurence@currentbody.com','Health and Beauty','Product concept + samples'],
+  ['Days 61-90','Recovery device concept','Therabody','Monty Sharma','monty.sharma@therabodycorp.com','Health and Beauty','Thermal therapy concept'],
+  ['Days 61-90','Operations supply chain pitch','Eight Sleep','Joe Aranda','joe@eightsleep.com','Contract Mfg','Supply agreement draft'],
+  ['Days 61-90','Research ResMed R&D contacts','ResMed','','','VA CPAP','Contact research'],
+  ['Days 61-90','Research Apple Vision Pro team','Apple','','','VR/AR','Contact research'],
+  ['Days 61-90','Prepare SBIR/STTR application','XII Medical + SleepNet','Garrett Schwab','gschwab@xiimedical.com','SBIR/STTR','Complete application'],
+  ['Days 61-90','LinkedIn prospecting expansion','Multiple','','','Multiple','Contact list expansion'],
+];
+const ab = document.getElementById('actionsBody');
+actions.forEach((a, i) => {
+  const pClass = a[0].includes('1-30')?'p1':a[0].includes('31-60')?'p2':'p3';
+  const emailCell = a[4] ? '<a class="email-link" href="mailto:'+a[4]+'">'+a[4]+'</a>' : '';
+  ab.innerHTML += '<tr><td>'+(i+1)+'</td><td><span class="phase '+pClass+'">'+a[0]+'</span></td><td>'+a[1]+'</td><td><strong>'+a[2]+'</strong></td><td>'+a[3]+'</td><td>'+emailCell+'</td><td>'+a[5]+'</td><td>'+a[6]+'</td></tr>';
+});
+
+const sources = [
+  {icon:'Ap',name:'Apollo People Bulk Match',desc:'27 contacts enriched across 3 batches with emails, phones, titles, LinkedIn URLs',records:'27 contacts'},
+  {icon:'Ex',name:'Explorium Business Intel',desc:'Firmographics, revenue, employees, funding rounds, investors, strategic insights',records:'20 companies'},
+  {icon:'Ic',name:'IcyPeas Email Verification',desc:'Cross-validated email deliverability for key hot contacts',records:'3 verified'},
+  {icon:'Cl',name:'Clay Contact Enrichment',desc:'LinkedIn-based contact discovery with email enrichment',records:'Initial discovery'},
+  {icon:'WR',name:'Web Research',desc:'Company context, product details, market sizing, competitive landscape',records:'All targets'},
+  {icon:'FK',name:'Fructify Strategic Kit',desc:'Vertical identification, ICP definition, entry strategies, revenue modeling',records:'12 verticals'},
+];
+const sc = document.getElementById('sourceCards');
+sources.forEach(s => {
+  sc.innerHTML += '<div class="source-card"><div class="source-icon">'+s.icon+'</div><div class="info"><h4>'+s.name+' <span class="badge complete">Complete</span></h4><p>'+s.desc+'</p><p><strong>'+s.records+'</strong></p></div></div>';
+});
+</script>
+</body>
+</html>
