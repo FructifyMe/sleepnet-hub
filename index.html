@@ -1,812 +1,362 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sleepnet × Fructify | Strategic Growth Assessment</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-:root {
-  --sleepnet-green: #58CB45;
-  --sleepnet-navy: #162A50;
-  --sleepnet-dark-blue: #233C7F;
-  --fructify-accent: #2E75B6;
-  --bg: #F8FAFB;
-  --card: #FFFFFF;
-  --text: #1a1a2e;
-  --text-secondary: #5a6178;
-  --border: #E8ECF1;
-  --green-light: #EDFBE9;
-  --red-light: #FFF0F0;
-  --blue-light: #EDF4FB;
-  --orange-light: #FFF8ED;
-  --purple-light: #F5EDFB;
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sleepnet × Fructify | Strategic Growth Assessment</title><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script><style>
+:root { --sleepnet-green: #58CB45; --sleepnet-navy: #162A50; --sleepnet-dark-blue: #233C7F; --fructify-accent: #2E75B6; --bg: #F8FAFB; --card: #FFFFFF; --text: #1a1a2e; --text-secondary: #5a6178; --border: #E8ECF1; --green-light: #EDFBE9; --red-light: #FFF0F0; --blue-light: #EDF4FB; --orange-light: #FFF8ED; --purple-light: #F5EDFB;
+} * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased;
+} .hero { background: linear-gradient(135deg, var(--sleepnet-navy) 0%, var(--sleepnet-dark-blue) 50%, #1a4a3a 100%); color: white; padding: 60px 40px 50px; position: relative; overflow: hidden;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+.hero::after { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; border-radius: 50%; background: rgba(88, 203, 69, 0.06);
 }
-
-.hero {
-  background: linear-gradient(135deg, var(--sleepnet-navy) 0%, var(--sleepnet-dark-blue) 50%, #1a4a3a 100%);
-  color: white;
-  padding: 60px 40px 50px;
-  position: relative;
-  overflow: hidden;
+.hero-badge { display: inline-block; background: rgba(88, 203, 69, 0.15); color: var(--sleepnet-green); padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 16px;
 }
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: rgba(88, 203, 69, 0.06);
-}
-.hero-badge {
-  display: inline-block;
-  background: rgba(88, 203, 69, 0.15);
-  color: var(--sleepnet-green);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
-}
-.hero h1 {
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  margin-bottom: 10px;
-  line-height: 1.15;
+.hero h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 10px; line-height: 1.15;
 }
 .hero h1 span { color: var(--sleepnet-green); }
 .hero p { font-size: 16px; opacity: 0.85; max-width: 700px; }
-.hero-meta {
-  display: flex;
-  gap: 24px;
-  margin-top: 24px;
-  flex-wrap: wrap;
+.hero-meta { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap;
 }
-.hero-meta-item {
-  font-size: 12px;
-  opacity: 0.6;
+.hero-meta-item { font-size: 12px; opacity: 0.6;
 }
-.hero-meta-item strong {
-  display: block;
-  font-size: 14px;
-  opacity: 1;
-  color: white;
+.hero-meta-item strong { display: block; font-size: 14px; opacity: 1; color: white;
+} /* Navigation */
+.nav { background: white; border-bottom: 2px solid var(--border); padding: 0 40px; position: sticky; top: 0; z-index: 100; display: flex; overflow-x: auto;
 }
-
-/* Navigation */
-.nav {
-  background: white;
-  border-bottom: 2px solid var(--border);
-  padding: 0 40px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  overflow-x: auto;
+.nav button { padding: 16px 24px; border: none; border-bottom: 3px solid transparent; background: transparent; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; white-space: nowrap; transition: all 0.2s;
 }
-.nav button {
-  padding: 16px 24px;
-  border: none;
-  border-bottom: 3px solid transparent;
-  background: transparent;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s;
+.nav button.active { color: var(--sleepnet-green); border-bottom-color: var(--sleepnet-green); font-weight: 600;
 }
-.nav button.active {
-  color: var(--sleepnet-green);
-  border-bottom-color: var(--sleepnet-green);
-  font-weight: 600;
-}
-.nav button:hover { color: var(--sleepnet-navy); }
-
-/* Content */
+.nav button:hover { color: var(--sleepnet-navy); } /* Content */
 .content { max-width: 1100px; margin: 0 auto; padding: 32px 40px; }
 .section { display: none; }
-.section.active { display: block; }
-
-/* Cards */
-.card {
-  background: var(--card);
-  border-radius: 14px;
-  padding: 24px;
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+.section.active { display: block; } /* Cards */
+.card { background: var(--card); border-radius: 14px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .card-accent { border-left: 4px solid var(--sleepnet-green); }
 .card-red { background: var(--red-light); border: 1px solid #FECACA; }
 .card-green { background: var(--green-light); border: 1px solid #BBF0B5; }
 .card-blue { background: var(--blue-light); border: 1px solid #BFD8F0; }
-.card-orange { background: var(--orange-light); border: 1px solid #F5DEB3; }
-
-h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--sleepnet-navy); }
+.card-orange { background: var(--orange-light); border: 1px solid #F5DEB3; } h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--sleepnet-navy); }
 h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--sleepnet-navy); }
-h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; } .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
-
-.stat-box {
-  background: #F8FAFB;
-  border-radius: 10px;
-  padding: 14px;
-  text-align: center;
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; } .stat-box { background: #F8FAFB; border-radius: 10px; padding: 14px; text-align: center;
 }
 .stat-box .label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-box .value { font-size: 22px; font-weight: 700; margin-top: 2px; }
 .stat-box .value.green { color: var(--sleepnet-green); }
 .stat-box .value.red { color: #E74C3C; }
 .stat-box .value.blue { color: var(--fructify-accent); }
-.stat-box .value.navy { color: var(--sleepnet-navy); }
-
-.badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
+.stat-box .value.navy { color: var(--sleepnet-navy); } .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
 }
 .badge-green { background: #DCFCE7; color: #16A34A; }
 .badge-red { background: #FEE2E2; color: #DC2626; }
 .badge-blue { background: #DBEAFE; color: #2563EB; }
 .badge-orange { background: #FEF3C7; color: #D97706; }
-.badge-purple { background: #F3E8FF; color: #7C3AED; }
-
-.divider { height: 1px; background: var(--border); margin: 24px 0; }
-
-.product-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-left: 4px solid;
-  cursor: default;
-}
-
-.competitor-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 14px;
-  background: #F8FAFB;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-.opp-card {
-  background: white;
-  border-radius: 12px;
-  padding: 18px 20px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.15s;
+.badge-purple { background: #F3E8FF; color: #7C3AED; } .divider { height: 1px; background: var(--border); margin: 24px 0; } .product-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--border); border-left: 4px solid; cursor: default;
+} .competitor-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #F8FAFB; border-radius: 8px; margin-bottom: 8px;
+} .opp-card { background: white; border-radius: 12px; padding: 18px 20px; border: 1px solid var(--border); cursor: pointer; transition: all 0.15s;
 }
 .opp-card:hover { border-color: var(--sleepnet-green); box-shadow: 0 2px 8px rgba(88,203,69,0.1); }
-.opp-card.expanded { border-color: var(--sleepnet-green); border-width: 2px; }
-
-.timeline-phase {
-  margin-bottom: 20px;
-  padding-left: 24px;
-  border-left: 3px solid var(--border);
-  position: relative;
+.opp-card.expanded { border-color: var(--sleepnet-green); border-width: 2px; } .timeline-phase { margin-bottom: 20px; padding-left: 24px; border-left: 3px solid var(--border); position: relative;
 }
-.timeline-phase::before {
-  content: '';
-  position: absolute;
-  left: -7px;
-  top: 4px;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--sleepnet-green);
-  border: 2px solid white;
+.timeline-phase::before { content: ''; position: absolute; left: -7px; top: 4px; width: 11px; height: 11px; border-radius: 50%; background: var(--sleepnet-green); border: 2px solid white;
 }
-.timeline-item {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 8px;
-  font-size: 13px;
+.timeline-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 13px;
 }
-.timeline-icon { font-size: 16px; flex-shrink: 0; }
-
-.cta-banner {
-  background: linear-gradient(135deg, var(--sleepnet-navy) 0%, #1a4a3a 100%);
-  border-radius: 14px;
-  padding: 32px;
-  color: white;
-  margin-top: 24px;
+.timeline-icon { font-size: 16px; flex-shrink: 0; } .cta-banner { background: linear-gradient(135deg, var(--sleepnet-navy) 0%, #1a4a3a 100%); border-radius: 14px; padding: 32px; color: white; margin-top: 24px;
 }
 .cta-banner h3 { color: white; font-size: 20px; margin-bottom: 10px; }
-.cta-banner p { opacity: 0.9; font-size: 14px; line-height: 1.7; }
-
-.chart-container { position: relative; height: 320px; margin: 16px 0; }
-
-.vertical-tab {
-  padding: 12px 18px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: white;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s;
-  flex: 1;
+.cta-banner p { opacity: 0.9; font-size: 14px; line-height: 1.7; } .chart-container { position: relative; height: 320px; margin: 16px 0; } .vertical-tab { padding: 12px 18px; border-radius: 10px; border: 1px solid var(--border); background: white; cursor: pointer; text-align: center; transition: all 0.15s; flex: 1;
 }
 .vertical-tab.active { border-color: var(--sleepnet-green); background: var(--green-light); }
 .vertical-tab .v-icon { font-size: 22px; display: block; margin-bottom: 4px; }
-.vertical-tab .v-name { font-size: 11px; font-weight: 600; color: var(--sleepnet-navy); }
-
-.detail-block {
-  background: #F8FAFB;
-  border-radius: 10px;
-  padding: 18px 20px;
-  margin-bottom: 12px;
+.vertical-tab .v-name { font-size: 11px; font-weight: 600; color: var(--sleepnet-navy); } .detail-block { background: #F8FAFB; border-radius: 10px; padding: 18px 20px; margin-bottom: 12px;
 }
-.detail-block h4 { font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
-
-@media (max-width: 768px) {
-  .hero { padding: 40px 20px 30px; }
-  .content { padding: 20px; }
-  .nav { padding: 0 20px; }
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 26px; }
+.detail-block h4 { font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; } @media (max-width: 768px) { .hero { padding: 40px 20px 30px; } .content { padding: 20px; } .nav { padding: 0 20px; } .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } .hero h1 { font-size: 26px; }
 }
-</style>
-</head>
-<body>
+</style></head><body><!-- HERO --><div class="hero"><div class="hero-badge">PREPARED FOR SLEEPNET CORPORATION</div><h1>Strategic Growth Assessment<br><span>Beyond CPAP</span></h1><p>A data-driven analysis of where Sleepnet's AIR°gel technology, manufacturing expertise, and regulatory credentials create competitive advantage — and four new revenue verticals that don't require fighting ResMed.</p><div class="hero-meta"><div class="hero-meta-item"><strong>Ronnie Moulton</strong>Manufacturing Manager</div><div class="hero-meta-item"><strong>Sleepnet Corporation</strong>Hampton, NH</div><div class="hero-meta-item"><strong>April 2026</strong>Prepared by Fructify Solutions</div></div></div><!-- NAV --><div class="nav" id="nav"><button class="active" onclick="showSection('reality')">The Reality Check</button><button onclick="showSection('productlines')">Product Line Analysis</button><button onclick="showSection('opportunities')">New Opportunities</button><button onclick="showSection('verticals')">Four Growth Verticals</button><button onclick="showSection('expansion')">AIR°gel Expansion</button><button onclick="showSection('timeline')">90-Day Action Plan</button><button onclick="showSection('erp')">ERP Decision</button><button onclick="showSection('about')">About This Assessment</button></div><!-- CONTENT --><div class="content"><!-- ═══ SECTION 1: REALITY CHECK ═══ --><div class="section active" id="sec-reality"><h2>The Hard Truth About Adult CPAP</h2><div class="card card-red"><h3 style="color:#DC2626">Sleepnet is spending its largest R&D line item fighting an unwinnable war</h3><p style="font-size:14px; margin-top:8px">Sleepnet currently allocates approximately <strong>$350,000/year</strong> in R&D to adult CPAP masks — more than any other product line. Meanwhile, <strong>ResMed holds 62% of the global CPAP market</strong>. Philips Respironics and Fisher & Paykel Healthcare control most of the rest. Sleepnet's estimated share: <strong>~2%</strong>.</p><p style="font-size:14px; margin-top:10px">Every R&D dollar spent on adult CPAP competes against companies with 200× Sleepnet's revenue, established hospital ecosystems, and multi-billion-dollar marketing budgets. That same dollar invested where Sleepnet has a real edge — pediatric CPAP, industrial respirators, or entirely new verticals — has dramatically higher expected return.</p></div><div class="grid-3" style="margin-top:20px"><div class="stat-box"><div class="label">ResMed Market Share</div><div class="value red">62%</div></div><div class="stat-box"><div class="label">Sleepnet Market Share</div><div class="value" style="color:var(--text-secondary)">~2%</div></div><div class="stat-box"><div class="label">Adult CPAP R&D Spend</div><div class="value red">$350K/yr</div></div></div><div class="card card-green" style="margin-top:20px"><h3 style="color:#16A34A">But Sleepnet has genuine competitive advantages — in the right markets</h3><p style="font-size:14px; margin-top:8px"><strong>Proprietary AIR°gel Technology</strong> — A patented medical-grade silicone gel cushion that no competitor has replicated. Provides measurable comfort, pressure distribution, and seal quality advantages across product lines.</p><p style="font-size:14px; margin-top:8px"><strong>35 Years of Manufacturing Expertise</strong> — FDA-compliant cleanroom, NIOSH N95/N99 certification, ISO compliance, precision gel molding capabilities. Infrastructure that takes competitors years to build.</p><p style="font-size:14px; margin-top:8px"><strong>100% American-Made</strong> — In an era of reshoring, supply chain concerns, and Buy American Act procurement preferences, Sleepnet's Hampton NH manufacturing is a genuine competitive asset.</p><p style="font-size:14px; margin-top:8px"><strong>International Distribution to 53+ Countries</strong> — Named NH 2023 Exporter of the Year. Existing global reach that most companies Sleepnet's size don't have.</p></div><div class="card" style="margin-top:20px"><h3>The Strategic Question</h3><p style="font-size:14px">Sleepnet doesn't need to become a bigger company to grow. It needs to become a <strong>sharper</strong> one — investing where it has a real edge and stopping investment where it doesn't. This assessment lays out exactly where those edges are, backed by market data, competitive analysis, and four specific new revenue verticals.</p></div></div><!-- ═══ SECTION 2: PRODUCT LINE ANALYSIS ═══ --><div class="section" id="sec-productlines"><h2>Product Line Competitive Position</h2><div class="grid-2"><div class="product-card" style="border-left-color: var(--sleepnet-green)"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px"><h3 style="margin:0">MiniMe2 Pediatric</h3><span class="badge badge-green">INVEST HEAVILY</span></div><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">FDA-cleared pediatric CPAP mask, ages 2-12. AIR°gel cushion with Custom Fit Technology. 4 sizes (XS-L). Clinical study with major US pediatric hospital.</p><div class="grid-4"><div class="stat-box"><div class="label">Revenue</div><div class="value green" style="font-size:16px">$1.2M</div></div><div class="stat-box"><div class="label">Margin</div><div class="value green" style="font-size:16px">42%</div></div><div class="stat-box"><div class="label">Mkt CAGR</div><div class="value green" style="font-size:16px">10.9%</div></div><div class="stat-box"><div class="label">Moat</div><div class="value green" style="font-size:16px">85/100</div></div></div><p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> Philips Wisp Pediatric, ResMed Pixi, Dräger NovaStar, Fisher & Paykel</p></div><div class="product-card" style="border-left-color: var(--fructify-accent)"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px"><h3 style="margin:0">Envo Pro Industrial</h3><span class="badge badge-blue">INVEST & EXPAND</span></div><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Reusable N95/N99 elastomeric respirator. NIOSH certified. AIR°gel comfort differentiation. Only gel-based reusable respirator on the market.</p><div class="grid-4"><div class="stat-box"><div class="label">Revenue</div><div class="value blue" style="font-size:16px">$1.8M</div></div><div class="stat-box"><div class="label">Margin</div><div class="value blue" style="font-size:16px">38%</div></div><div class="stat-box"><div class="label">Mkt CAGR</div><div class="value blue" style="font-size:16px">19.7%</div></div><div class="stat-box"><div class="label">Moat</div><div class="value blue" style="font-size:16px">70/100</div></div></div><p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> 3M 6200 Series, Honeywell 7700, Moldex, GVS Elipse P100</p></div><div class="product-card" style="border-left-color: #E74C3C"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px"><h3 style="margin:0">Adult CPAP Masks</h3><span class="badge badge-red">DEPRIORITIZE</span></div><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Competing against ResMed (62% share), Philips, and Fisher & Paykel. AIR°gel provides comfort differentiation, but it's insufficient against ecosystem lock-in.</p><div class="grid-4"><div class="stat-box"><div class="label">Revenue</div><div class="value" style="font-size:16px; color:var(--text-secondary)">$2.0M</div></div><div class="stat-box"><div class="label">Margin</div><div class="value" style="font-size:16px; color:var(--text-secondary)">28%</div></div><div class="stat-box"><div class="label">Mkt CAGR</div><div class="value" style="font-size:16px; color:var(--text-secondary)">7.6%</div></div><div class="stat-box"><div class="label">Moat</div><div class="value red" style="font-size:16px">20/100</div></div></div><p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> ResMed AirFit (62%), Philips DreamWear, Fisher & Paykel Brevida</p></div><div class="product-card" style="border-left-color: #F39C12"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px"><h3 style="margin:0">NIV Hospital Masks</h3><span class="badge badge-orange">MAINTAIN</span></div><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Non-invasive ventilation masks for hospital/clinical use. Steady contributor. Cardinal Health distribution partnership provides channel strength.</p><div class="grid-4"><div class="stat-box"><div class="label">Revenue</div><div class="value" style="font-size:16px; color:#D97706">$1.0M</div></div><div class="stat-box"><div class="label">Margin</div><div class="value" style="font-size:16px; color:#D97706">35%</div></div><div class="stat-box"><div class="label">Mkt CAGR</div><div class="value" style="font-size:16px; color:#D97706">4.3%</div></div><div class="stat-box"><div class="label">Moat</div><div class="value" style="font-size:16px; color:#D97706">45/100</div></div></div><p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> Hamilton Medical, Dräger, Fisher & Paykel, ResMed</p></div></div><!-- R&D Chart --><div class="card" style="margin-top:20px"><h3>R&D Allocation vs. Market Defensibility</h3><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Current R&D spend is inversely correlated with competitive position. The biggest investment goes to the weakest moat.</p><div class="chart-container" style="height:280px"><canvas id="rdChart"></canvas></div></div></div><!-- ═══ SECTION 3: OPPORTUNITIES ═══ --><div class="section" id="sec-opportunities"><h2>Beyond Masks: Where AIR°gel Technology Wins</h2><p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px">Sleepnet's core asset isn't masks — it's <strong>proprietary medical-grade silicone gel manufacturing</strong>. That capability transfers to markets where no one is offering what Sleepnet can build.</p><div class="grid-2" id="oppGrid"></div><div class="card" style="margin-top:20px"><h3>Capability Fit Score</h3><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">How well Sleepnet's existing tech, manufacturing, and regulatory credentials transfer to each opportunity.</p><div class="chart-container" style="height:350px"><canvas id="fitChart"></canvas></div></div></div><!-- ═══ SECTION 4: FOUR GROWTH VERTICALS ═══ --><div class="section" id="sec-verticals"><h2>Four New Revenue Verticals</h2><p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px">Each one is validated with real market data, specific customer targets, and a clear manufacturing pathway. Combined Year 1 potential: <strong>$2.2–5.7M</strong>.</p><div style="display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap" id="vertTabs"></div><div id="vertDetail"></div><!-- Revenue Chart --><div class="card" style="margin-top:24px"><h3>Projected 12-Month Revenue Ramp (Cumulative, $K)</h3><div class="chart-container"><canvas id="revenueChart"></canvas></div></div><div class="cta-banner"><h3>What Ronnie Takes to Tom</h3><p>"We're spending $350K a year trying to out-R&D a company with 62% market share. Instead, I've got four validated verticals that use the same factory and the same team: VR face interfaces where nobody uses medical-grade gel and the market's growing 30% a year, VA contracts where our American-made status gives us a 30% price preference on $2B in procurement, SBIR grants where a company just like us won $1.7M for CPAP comfort research, and contract manufacturing for the $200M+ in sleep tech startups that need someone to build their products. Combined Year 1: $2–6M in new revenue. Zero new equipment."</p></div></div><!-- ═══ SECTION 5: AIRGEL EXPANSION ═══ --><div class="section" id="sec-expansion"><h2>AIR°gel Technology: Where Else Does It Win?</h2><p style="font-size:14px; color:var(--text-secondary); margin-bottom:8px">Sleepnet's real asset isn't masks — it's <strong>proprietary medical-grade silicone gel manufacturing + precision face-interface engineering</strong>. That combination transfers to markets worth <strong>$50B+</strong> where nobody is offering what Sleepnet can build.</p><p style="font-size:13px; color:var(--text-secondary); margin-bottom:24px">Click any card to expand the full opportunity brief.</p><div class="grid-2" id="expansionGrid"></div><div class="card" style="margin-top:24px"><h3>Expansion Opportunity Fit Scores</h3><p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">How well Sleepnet's existing capabilities (gel manufacturing, face-seal engineering, regulatory certs, precision molding) transfer to each new market.</p><div class="chart-container" style="height:400px"><canvas id="expansionFitChart"></canvas></div></div><div class="card" style="margin-top:16px"><h3>Total Addressable Market by Vertical</h3><div class="chart-container" style="height:320px"><canvas id="tamChart"></canvas></div></div><div class="cta-banner"><h3>The Big Picture for Ronnie</h3><p>Sleepnet's AIR°gel technology and precision molding infrastructure are platform capabilities, not product-specific ones. The same gel that seals a CPAP mask to a patient's face can seal a ski goggle, cushion a fighter pilot's oxygen mask, line an LED beauty device, pad an earbud, or protect a firefighter. Eight new markets. Same factory. Same core IP. The question isn't whether Sleepnet can do this — it's which markets to attack first.</p></div></div><!-- ═══ SECTION 6: 90-DAY PLAN ═══ --><div class="section" id="sec-timeline"><h2>90-Day Action Plan</h2><p style="font-size:14px; color:var(--text-secondary); margin-bottom:24px">All four verticals running in parallel. Fastest wins first.</p><div class="timeline-phase"><h3 style="margin-bottom:12px"><span class="badge badge-green">Days 1–30</span></h3><div class="timeline-item"><span class="timeline-icon">🏭</span><span><strong>CMO:</strong> Create contract manufacturing brochure + landing page. Cold outreach to SleepRes (launching H1 2026) and XII Medical ($45M Series B).</span></div><div class="timeline-item"><span class="timeline-icon">💰</span><span><strong>SBIR:</strong> Register SBIR.gov + NIH eRA Commons. Begin NIH Phase I application — a company called Bleep LLC won $1.7M for the exact same thing.</span></div><div class="timeline-item"><span class="timeline-icon">🏥</span><span><strong>VA:</strong> Register SAM.gov (10 business days, free). Contact VA OPAL for IDIQ contract info. Verify FDA 510(k) covers VA categories.</span></div><div class="timeline-item"><span class="timeline-icon">🥽</span><span><strong>VR:</strong> Begin Quest 3 gel face interface design. Source 3D facial scan data from existing mask molds. Budget: ~$15K tooling.</span></div></div><div class="timeline-phase"><h3 style="margin-bottom:12px"><span class="badge badge-blue">Days 31–60</span></h3><div class="timeline-item"><span class="timeline-icon">🏭</span><span><strong>CMO:</strong> Sign LOI with first contract manufacturing customer. Begin pilot production run (1,000 units).</span></div><div class="timeline-item"><span class="timeline-icon">💰</span><span><strong>SBIR:</strong> Submit NIH Phase I ($150-225K). Draft NSF SBIR for advanced silicone gel materials.</span></div><div class="timeline-item"><span class="timeline-icon">🏥</span><span><strong>VA:</strong> Submit VA Federal Supply Schedule 65 II A proposal. Contact VHA Innovation Network for pilot at 1-2 VA medical centers.</span></div><div class="timeline-item"><span class="timeline-icon">🥽</span><span><strong>VR:</strong> Produce 200 Quest 3 prototypes for beta testing. Begin Amazon listing prep.</span></div></div><div class="timeline-phase"><h3 style="margin-bottom:12px"><span class="badge badge-purple">Days 61–90</span></h3><div class="timeline-item"><span class="timeline-icon">🏭</span><span><strong>CMO:</strong> Ship first pilot batch. Sign 2nd customer. Target Vivos Therapeutics and Respira Labs.</span></div><div class="timeline-item"><span class="timeline-icon">💰</span><span><strong>SBIR:</strong> NIH review cycle begins (3-4 months to decision). Draft DOD SBIR for CBRN respiratory comfort.</span></div><div class="timeline-item"><span class="timeline-icon">🏥</span><span><strong>VA:</strong> VA proposal under evaluation. Begin collecting CPAP compliance improvement data (AIR°gel vs. standard).</span></div><div class="timeline-item"><span class="timeline-icon">🥽</span><span><strong>VR:</strong> Launch Quest 3 gel interface on Amazon. Start enterprise outreach to Walmart VR training, corporate buyers.</span></div></div><div class="card" style="margin-top:20px"><h3>12-Month Revenue Targets</h3><div class="grid-4"><div class="stat-box"><div class="label">🥽 VR/AR</div><div class="value green" style="font-size:18px">$1–3M</div></div><div class="stat-box"><div class="label">🏥 VA CPAP</div><div class="value blue" style="font-size:18px">$500K–1M</div></div><div class="stat-box"><div class="label">💰 SBIR Grants</div><div class="value green" style="font-size:18px">$150–225K</div></div><div class="stat-box"><div class="label">🏭 Contract Mfg</div><div class="value blue" style="font-size:18px">$500K–1.5M</div></div></div><div style="text-align:center; margin-top:16px; padding-top:16px; border-top:1px solid var(--border)"><div style="font-size:12px; color:var(--text-secondary)">Combined Year 1 Target</div><div style="font-size:32px; font-weight:800; color:var(--sleepnet-green)">$2.2 — $5.7M</div><div style="font-size:13px; color:var(--text-secondary)">New revenue. Same factory. Same team.</div></div></div></div><!-- ═══ SECTION 7: ABOUT ═══ --><div class="section" id="sec-erp">
+  <h2>ERP Decision: Acumatica vs. MISys + QuickBooks</h2>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">PREPARED FOR SLEEPNET CORPORATION</div>
-  <h1>Strategic Growth Assessment<br><span>Beyond CPAP</span></h1>
-  <p>A data-driven analysis of where Sleepnet's AIR°gel technology, manufacturing expertise, and regulatory credentials create competitive advantage — and four new revenue verticals that don't require fighting ResMed.</p>
-  <div class="hero-meta">
-    <div class="hero-meta-item"><strong>Ronnie Moulton</strong>Manufacturing Manager</div>
-    <div class="hero-meta-item"><strong>Sleepnet Corporation</strong>Hampton, NH</div>
-    <div class="hero-meta-item"><strong>April 2026</strong>Prepared by Fructify Solutions</div>
-  </div>
-</div>
-
-<!-- NAV -->
-<div class="nav" id="nav">
-  <button class="active" onclick="showSection('reality')">The Reality Check</button>
-  <button onclick="showSection('productlines')">Product Line Analysis</button>
-  <button onclick="showSection('opportunities')">New Opportunities</button>
-  <button onclick="showSection('verticals')">Four Growth Verticals</button>
-  <button onclick="showSection('expansion')">AIR°gel Expansion</button>
-  <button onclick="showSection('timeline')">90-Day Action Plan</button>
-  <button onclick="showSection('about')">About This Assessment</button>
-</div>
-
-<!-- CONTENT -->
-<div class="content">
-
-<!-- ═══ SECTION 1: REALITY CHECK ═══ -->
-<div class="section active" id="sec-reality">
-  <h2>The Hard Truth About Adult CPAP</h2>
-
-  <div class="card card-red">
-    <h3 style="color:#DC2626">Sleepnet is spending its largest R&D line item fighting an unwinnable war</h3>
-    <p style="font-size:14px; margin-top:8px">Sleepnet currently allocates approximately <strong>$350,000/year</strong> in R&D to adult CPAP masks — more than any other product line. Meanwhile, <strong>ResMed holds 62% of the global CPAP market</strong>. Philips Respironics and Fisher & Paykel Healthcare control most of the rest. Sleepnet's estimated share: <strong>~2%</strong>.</p>
-    <p style="font-size:14px; margin-top:10px">Every R&D dollar spent on adult CPAP competes against companies with 200× Sleepnet's revenue, established hospital ecosystems, and multi-billion-dollar marketing budgets. That same dollar invested where Sleepnet has a real edge — pediatric CPAP, industrial respirators, or entirely new verticals — has dramatically higher expected return.</p>
-  </div>
-
-  <div class="grid-3" style="margin-top:20px">
-    <div class="stat-box"><div class="label">ResMed Market Share</div><div class="value red">62%</div></div>
-    <div class="stat-box"><div class="label">Sleepnet Market Share</div><div class="value" style="color:var(--text-secondary)">~2%</div></div>
-    <div class="stat-box"><div class="label">Adult CPAP R&D Spend</div><div class="value red">$350K/yr</div></div>
-  </div>
-
-  <div class="card card-green" style="margin-top:20px">
-    <h3 style="color:#16A34A">But Sleepnet has genuine competitive advantages — in the right markets</h3>
-    <p style="font-size:14px; margin-top:8px"><strong>Proprietary AIR°gel Technology</strong> — A patented medical-grade silicone gel cushion that no competitor has replicated. Provides measurable comfort, pressure distribution, and seal quality advantages across product lines.</p>
-    <p style="font-size:14px; margin-top:8px"><strong>35 Years of Manufacturing Expertise</strong> — FDA-compliant cleanroom, NIOSH N95/N99 certification, ISO compliance, precision gel molding capabilities. Infrastructure that takes competitors years to build.</p>
-    <p style="font-size:14px; margin-top:8px"><strong>100% American-Made</strong> — In an era of reshoring, supply chain concerns, and Buy American Act procurement preferences, Sleepnet's Hampton NH manufacturing is a genuine competitive asset.</p>
-    <p style="font-size:14px; margin-top:8px"><strong>International Distribution to 53+ Countries</strong> — Named NH 2023 Exporter of the Year. Existing global reach that most companies Sleepnet's size don't have.</p>
-  </div>
-
-  <div class="card" style="margin-top:20px">
-    <h3>The Strategic Question</h3>
-    <p style="font-size:14px">Sleepnet doesn't need to become a bigger company to grow. It needs to become a <strong>sharper</strong> one — investing where it has a real edge and stopping investment where it doesn't. This assessment lays out exactly where those edges are, backed by market data, competitive analysis, and four specific new revenue verticals.</p>
-  </div>
-</div>
-
-<!-- ═══ SECTION 2: PRODUCT LINE ANALYSIS ═══ -->
-<div class="section" id="sec-productlines">
-  <h2>Product Line Competitive Position</h2>
-
-  <div class="grid-2">
-    <div class="product-card" style="border-left-color: var(--sleepnet-green)">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
-        <h3 style="margin:0">MiniMe2 Pediatric</h3>
-        <span class="badge badge-green">INVEST HEAVILY</span>
-      </div>
-      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">FDA-cleared pediatric CPAP mask, ages 2-12. AIR°gel cushion with Custom Fit Technology. 4 sizes (XS-L). Clinical study with major US pediatric hospital.</p>
-      <div class="grid-4">
-        <div class="stat-box"><div class="label">Revenue</div><div class="value green" style="font-size:16px">$1.2M</div></div>
-        <div class="stat-box"><div class="label">Margin</div><div class="value green" style="font-size:16px">42%</div></div>
-        <div class="stat-box"><div class="label">Mkt CAGR</div><div class="value green" style="font-size:16px">10.9%</div></div>
-        <div class="stat-box"><div class="label">Moat</div><div class="value green" style="font-size:16px">85/100</div></div>
-      </div>
-      <p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> Philips Wisp Pediatric, ResMed Pixi, Dräger NovaStar, Fisher & Paykel</p>
-    </div>
-
-    <div class="product-card" style="border-left-color: var(--fructify-accent)">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
-        <h3 style="margin:0">Envo Pro Industrial</h3>
-        <span class="badge badge-blue">INVEST & EXPAND</span>
-      </div>
-      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Reusable N95/N99 elastomeric respirator. NIOSH certified. AIR°gel comfort differentiation. Only gel-based reusable respirator on the market.</p>
-      <div class="grid-4">
-        <div class="stat-box"><div class="label">Revenue</div><div class="value blue" style="font-size:16px">$1.8M</div></div>
-        <div class="stat-box"><div class="label">Margin</div><div class="value blue" style="font-size:16px">38%</div></div>
-        <div class="stat-box"><div class="label">Mkt CAGR</div><div class="value blue" style="font-size:16px">19.7%</div></div>
-        <div class="stat-box"><div class="label">Moat</div><div class="value blue" style="font-size:16px">70/100</div></div>
-      </div>
-      <p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> 3M 6200 Series, Honeywell 7700, Moldex, GVS Elipse P100</p>
-    </div>
-
-    <div class="product-card" style="border-left-color: #E74C3C">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
-        <h3 style="margin:0">Adult CPAP Masks</h3>
-        <span class="badge badge-red">DEPRIORITIZE</span>
-      </div>
-      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Competing against ResMed (62% share), Philips, and Fisher & Paykel. AIR°gel provides comfort differentiation, but it's insufficient against ecosystem lock-in.</p>
-      <div class="grid-4">
-        <div class="stat-box"><div class="label">Revenue</div><div class="value" style="font-size:16px; color:var(--text-secondary)">$2.0M</div></div>
-        <div class="stat-box"><div class="label">Margin</div><div class="value" style="font-size:16px; color:var(--text-secondary)">28%</div></div>
-        <div class="stat-box"><div class="label">Mkt CAGR</div><div class="value" style="font-size:16px; color:var(--text-secondary)">7.6%</div></div>
-        <div class="stat-box"><div class="label">Moat</div><div class="value red" style="font-size:16px">20/100</div></div>
-      </div>
-      <p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> ResMed AirFit (62%), Philips DreamWear, Fisher & Paykel Brevida</p>
-    </div>
-
-    <div class="product-card" style="border-left-color: #F39C12">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
-        <h3 style="margin:0">NIV Hospital Masks</h3>
-        <span class="badge badge-orange">MAINTAIN</span>
-      </div>
-      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Non-invasive ventilation masks for hospital/clinical use. Steady contributor. Cardinal Health distribution partnership provides channel strength.</p>
-      <div class="grid-4">
-        <div class="stat-box"><div class="label">Revenue</div><div class="value" style="font-size:16px; color:#D97706">$1.0M</div></div>
-        <div class="stat-box"><div class="label">Margin</div><div class="value" style="font-size:16px; color:#D97706">35%</div></div>
-        <div class="stat-box"><div class="label">Mkt CAGR</div><div class="value" style="font-size:16px; color:#D97706">4.3%</div></div>
-        <div class="stat-box"><div class="label">Moat</div><div class="value" style="font-size:16px; color:#D97706">45/100</div></div>
-      </div>
-      <p style="font-size:11px; color:var(--text-secondary); margin-top:10px"><strong>vs:</strong> Hamilton Medical, Dräger, Fisher & Paykel, ResMed</p>
-    </div>
-  </div>
-
-  <!-- R&D Chart -->
-  <div class="card" style="margin-top:20px">
-    <h3>R&D Allocation vs. Market Defensibility</h3>
-    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Current R&D spend is inversely correlated with competitive position. The biggest investment goes to the weakest moat.</p>
-    <div class="chart-container" style="height:280px"><canvas id="rdChart"></canvas></div>
-  </div>
-</div>
-
-<!-- ═══ SECTION 3: OPPORTUNITIES ═══ -->
-<div class="section" id="sec-opportunities">
-  <h2>Beyond Masks: Where AIR°gel Technology Wins</h2>
-  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px">Sleepnet's core asset isn't masks — it's <strong>proprietary medical-grade silicone gel manufacturing</strong>. That capability transfers to markets where no one is offering what Sleepnet can build.</p>
-
-  <div class="grid-2" id="oppGrid">
-  </div>
-
-  <div class="card" style="margin-top:20px">
-    <h3>Capability Fit Score</h3>
-    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">How well Sleepnet's existing tech, manufacturing, and regulatory credentials transfer to each opportunity.</p>
-    <div class="chart-container" style="height:350px"><canvas id="fitChart"></canvas></div>
-  </div>
-</div>
-
-<!-- ═══ SECTION 4: FOUR GROWTH VERTICALS ═══ -->
-<div class="section" id="sec-verticals">
-  <h2>Four New Revenue Verticals</h2>
-  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px">Each one is validated with real market data, specific customer targets, and a clear manufacturing pathway. Combined Year 1 potential: <strong>$2.2–5.7M</strong>.</p>
-
-  <div style="display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap" id="vertTabs"></div>
-
-  <div id="vertDetail"></div>
-
-  <!-- Revenue Chart -->
-  <div class="card" style="margin-top:24px">
-    <h3>Projected 12-Month Revenue Ramp (Cumulative, $K)</h3>
-    <div class="chart-container"><canvas id="revenueChart"></canvas></div>
-  </div>
-
-  <div class="cta-banner">
-    <h3>What Ronnie Takes to Tom</h3>
-    <p>"We're spending $350K a year trying to out-R&D a company with 62% market share. Instead, I've got four validated verticals that use the same factory and the same team: VR face interfaces where nobody uses medical-grade gel and the market's growing 30% a year, VA contracts where our American-made status gives us a 30% price preference on $2B in procurement, SBIR grants where a company just like us won $1.7M for CPAP comfort research, and contract manufacturing for the $200M+ in sleep tech startups that need someone to build their products. Combined Year 1: $2–6M in new revenue. Zero new equipment."</p>
-  </div>
-</div>
-
-<!-- ═══ SECTION 5: AIRGEL EXPANSION ═══ -->
-<div class="section" id="sec-expansion">
-  <h2>AIR°gel Technology: Where Else Does It Win?</h2>
-  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:8px">Sleepnet's real asset isn't masks — it's <strong>proprietary medical-grade silicone gel manufacturing + precision face-interface engineering</strong>. That combination transfers to markets worth <strong>$50B+</strong> where nobody is offering what Sleepnet can build.</p>
-  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:24px">Click any card to expand the full opportunity brief.</p>
-
-  <div class="grid-2" id="expansionGrid"></div>
-
-  <div class="card" style="margin-top:24px">
-    <h3>Expansion Opportunity Fit Scores</h3>
-    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">How well Sleepnet's existing capabilities (gel manufacturing, face-seal engineering, regulatory certs, precision molding) transfer to each new market.</p>
-    <div class="chart-container" style="height:400px"><canvas id="expansionFitChart"></canvas></div>
-  </div>
-
-  <div class="card" style="margin-top:16px">
-    <h3>Total Addressable Market by Vertical</h3>
-    <div class="chart-container" style="height:320px"><canvas id="tamChart"></canvas></div>
-  </div>
-
-  <div class="cta-banner">
-    <h3>The Big Picture for Ronnie</h3>
-    <p>Sleepnet's AIR°gel technology and precision molding infrastructure are platform capabilities, not product-specific ones. The same gel that seals a CPAP mask to a patient's face can seal a ski goggle, cushion a fighter pilot's oxygen mask, line an LED beauty device, pad an earbud, or protect a firefighter. Eight new markets. Same factory. Same core IP. The question isn't whether Sleepnet can do this — it's which markets to attack first.</p>
-  </div>
-</div>
-
-<!-- ═══ SECTION 6: 90-DAY PLAN ═══ -->
-<div class="section" id="sec-timeline">
-  <h2>90-Day Action Plan</h2>
-  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:24px">All four verticals running in parallel. Fastest wins first.</p>
-
-  <div class="timeline-phase">
-    <h3 style="margin-bottom:12px"><span class="badge badge-green">Days 1–30</span></h3>
-    <div class="timeline-item"><span class="timeline-icon">🏭</span><span><strong>CMO:</strong> Create contract manufacturing brochure + landing page. Cold outreach to SleepRes (launching H1 2026) and XII Medical ($45M Series B).</span></div>
-    <div class="timeline-item"><span class="timeline-icon">💰</span><span><strong>SBIR:</strong> Register SBIR.gov + NIH eRA Commons. Begin NIH Phase I application — a company called Bleep LLC won $1.7M for the exact same thing.</span></div>
-    <div class="timeline-item"><span class="timeline-icon">🏥</span><span><strong>VA:</strong> Register SAM.gov (10 business days, free). Contact VA OPAL for IDIQ contract info. Verify FDA 510(k) covers VA categories.</span></div>
-    <div class="timeline-item"><span class="timeline-icon">🥽</span><span><strong>VR:</strong> Begin Quest 3 gel face interface design. Source 3D facial scan data from existing mask molds. Budget: ~$15K tooling.</span></div>
-  </div>
-
-  <div class="timeline-phase">
-    <h3 style="margin-bottom:12px"><span class="badge badge-blue">Days 31–60</span></h3>
-    <div class="timeline-item"><span class="timeline-icon">🏭</span><span><strong>CMO:</strong> Sign LOI with first contract manufacturing customer. Begin pilot production run (1,000 units).</span></div>
-    <div class="timeline-item"><span class="timeline-icon">💰</span><span><strong>SBIR:</strong> Submit NIH Phase I ($150-225K). Draft NSF SBIR for advanced silicone gel materials.</span></div>
-    <div class="timeline-item"><span class="timeline-icon">🏥</span><span><strong>VA:</strong> Submit VA Federal Supply Schedule 65 II A proposal. Contact VHA Innovation Network for pilot at 1-2 VA medical centers.</span></div>
-    <div class="timeline-item"><span class="timeline-icon">🥽</span><span><strong>VR:</strong> Produce 200 Quest 3 prototypes for beta testing. Begin Amazon listing prep.</span></div>
-  </div>
-
-  <div class="timeline-phase">
-    <h3 style="margin-bottom:12px"><span class="badge badge-purple">Days 61–90</span></h3>
-    <div class="timeline-item"><span class="timeline-icon">🏭</span><span><strong>CMO:</strong> Ship first pilot batch. Sign 2nd customer. Target Vivos Therapeutics and Respira Labs.</span></div>
-    <div class="timeline-item"><span class="timeline-icon">💰</span><span><strong>SBIR:</strong> NIH review cycle begins (3-4 months to decision). Draft DOD SBIR for CBRN respiratory comfort.</span></div>
-    <div class="timeline-item"><span class="timeline-icon">🏥</span><span><strong>VA:</strong> VA proposal under evaluation. Begin collecting CPAP compliance improvement data (AIR°gel vs. standard).</span></div>
-    <div class="timeline-item"><span class="timeline-icon">🥽</span><span><strong>VR:</strong> Launch Quest 3 gel interface on Amazon. Start enterprise outreach to Walmart VR training, corporate buyers.</span></div>
-  </div>
-
-  <div class="card" style="margin-top:20px">
-    <h3>12-Month Revenue Targets</h3>
-    <div class="grid-4">
-      <div class="stat-box"><div class="label">🥽 VR/AR</div><div class="value green" style="font-size:18px">$1–3M</div></div>
-      <div class="stat-box"><div class="label">🏥 VA CPAP</div><div class="value blue" style="font-size:18px">$500K–1M</div></div>
-      <div class="stat-box"><div class="label">💰 SBIR Grants</div><div class="value green" style="font-size:18px">$150–225K</div></div>
-      <div class="stat-box"><div class="label">🏭 Contract Mfg</div><div class="value blue" style="font-size:18px">$500K–1.5M</div></div>
-    </div>
-    <div style="text-align:center; margin-top:16px; padding-top:16px; border-top:1px solid var(--border)">
-      <div style="font-size:12px; color:var(--text-secondary)">Combined Year 1 Target</div>
-      <div style="font-size:32px; font-weight:800; color:var(--sleepnet-green)">$2.2 — $5.7M</div>
-      <div style="font-size:13px; color:var(--text-secondary)">New revenue. Same factory. Same team.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ SECTION 7: ABOUT ═══ -->
-<div class="section" id="sec-about">
-  <h2>About This Assessment</h2>
   <div class="card card-accent">
-    <p style="font-size:14px; line-height:1.8">This strategic growth assessment was prepared by <strong>Fructify Solutions</strong> using Claude Cowork — an AI-powered workspace that combines real-time market research, competitive intelligence, financial modeling, and strategic analysis.</p>
-    <p style="font-size:14px; line-height:1.8; margin-top:12px">Every data point in this document is sourced from real market research: industry reports from Grand View Research, Mordor Intelligence, and Precedence Research; government procurement data from SAM.gov and GAO reports; competitive intelligence from public filings and product analysis; and SBIR/STTR grant databases.</p>
-    <p style="font-size:14px; line-height:1.8; margin-top:12px">What you're looking at is what a <strong>Fructify Cowork Kit</strong> produces. This entire assessment — the competitive analysis, the opportunity mapping, the financial projections, the action plans — was generated in a single working session. A kit built for Ronnie's specific role as Manufacturing Manager at Sleepnet would produce this kind of strategic intelligence on demand, every day.</p>
+    <h3>The question Ronnie asked</h3>
+    <p style="font-size:14px; margin-top:8px">"Does Acumatica have anything over using MISys and QuickBooks?" Short answer: <strong>yes, it has real advantages — but "having more" doesn't automatically mean "worth switching to."</strong> The right answer depends on internal pain and forward strategy, not on a feature checklist. This section gives Sleepnet the data to decide for itself.</p>
+    <p style="font-size:13px; color:var(--text-secondary); margin-top:10px"><em>NetSuite Manufacturing is included as a third-option benchmark because leadership will likely ask. It's not a recommendation — it's context.</em></p>
   </div>
 
-  <div class="card" style="margin-top:16px">
-    <h3>What a Cowork Kit Does</h3>
-    <p style="font-size:14px; margin-top:8px; line-height:1.7">A personalized AI workspace with custom skills for production tracking, quality analysis, supplier management, and strategic modeling — built around Sleepnet's specific products, competitors, and workflows. It's the difference between a general-purpose tool and one that knows your business.</p>
+  <h3 style="margin-top:24px">The Three Options at a Glance</h3>
+  <div class="grid-3" style="margin-top:12px">
+    <div class="product-card" style="border-left-color: var(--text-secondary)">
+      <div class="badge badge-blue" style="margin-bottom:8px">CURRENT</div>
+      <h4 style="font-size:16px; color:var(--sleepnet-navy)">MISys + QuickBooks</h4>
+      <p style="font-size:12px; color:var(--text-secondary); margin-top:6px">Status quo. Bolt-on manufacturing module synced to QuickBooks GL.</p>
+      <div style="margin-top:14px; font-size:12px"><p><strong>3-Yr TCO:</strong> ~$80K</p><p><strong>Implementation:</strong> 2-6 weeks</p><p><strong>Best fit:</strong> $2M-$15M shops, single product line, low regulatory burden</p></div>
+      <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border)">
+        <p style="font-size:11px; font-weight:700; color:#16A34A">STRENGTHS</p>
+        <p style="font-size:12px; margin-top:4px">Cheapest. Fastest to deploy. Familiar to bookkeepers. Modular pricing.</p>
+        <p style="font-size:11px; font-weight:700; color:#DC2626; margin-top:8px">CONSTRAINTS</p>
+        <p style="font-size:12px; margin-top:4px">Two databases, sync to maintain. QB not designed for FDA validation. Requires separate QMS for ISO 13485 / 21 CFR Part 11.</p>
+      </div>
+    </div>
+    <div class="product-card" style="border-left-color: var(--sleepnet-green)">
+      <div class="badge badge-green" style="margin-bottom:8px">CONTENDER</div>
+      <h4 style="font-size:16px; color:var(--sleepnet-navy)">Acumatica Mfg Edition</h4>
+      <p style="font-size:12px; color:var(--text-secondary); margin-top:6px">Cloud-native ERP with integrated manufacturing, financials, lot/serial, embedded QMS.</p>
+      <div style="margin-top:14px; font-size:12px"><p><strong>3-Yr TCO:</strong> ~$218K</p><p><strong>Implementation:</strong> 2-3 months</p><p><strong>Best fit:</strong> $5M-$50M shops, native compliance, multi-line P&L, growth runway</p></div>
+      <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border)">
+        <p style="font-size:11px; font-weight:700; color:#16A34A">STRENGTHS</p>
+        <p style="font-size:12px; margin-top:4px">One database. Real-time costing. Strong lot/serial. Embedded QMS. Per-resource pricing (unlimited users).</p>
+        <p style="font-size:11px; font-weight:700; color:#DC2626; margin-top:8px">CONSTRAINTS</p>
+        <p style="font-size:12px; margin-top:4px">~3x the cost. Requires VAR partner. Real change management. 2-3 month project.</p>
+      </div>
+    </div>
+    <div class="product-card" style="border-left-color: var(--fructify-accent)">
+      <div class="badge badge-blue" style="margin-bottom:8px">BENCHMARK</div>
+      <h4 style="font-size:16px; color:var(--sleepnet-navy)">NetSuite Mfg Edition</h4>
+      <p style="font-size:12px; color:var(--text-secondary); margin-top:6px">Oracle's cloud ERP. Deepest module library. Common in PE-backed and multi-entity shops.</p>
+      <div style="margin-top:14px; font-size:12px"><p><strong>3-Yr TCO:</strong> ~$436K</p><p><strong>Implementation:</strong> 4-6 months</p><p><strong>Best fit:</strong> $15M+ shops, multi-entity, international, M&A complexity</p></div>
+      <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border)">
+        <p style="font-size:11px; font-weight:700; color:#16A34A">STRENGTHS</p>
+        <p style="font-size:12px; margin-top:4px">Deepest modules. Mature multi-entity, multi-currency. Largest partner ecosystem. Validation packs.</p>
+        <p style="font-size:11px; font-weight:700; color:#DC2626; margin-top:8px">CONSTRAINTS</p>
+        <p style="font-size:12px; margin-top:4px">Most expensive. 6-month project. Per-user pricing scales painfully. Generally over-scoped for $6M single-entity ops.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">The Sleepnet-Specific Lens</h3>
+  <div class="card card-blue">
+    <p style="font-size:14px">Five factors make Sleepnet's situation specific. Each ERP option handles them differently.</p>
     <div style="margin-top:16px">
-      <p style="font-size:14px"><strong>Mike Farley</strong> — Fructify Solutions</p>
-      <p style="font-size:13px; color:var(--text-secondary)">fructifyme@gmail.com</p>
+      <div class="detail-block"><h4>1. Multi-product-line P&L (the Tom question)</h4><p style="font-size:13px">Reallocating R&D away from adult CPAP and into Envo Pro / MiniMe2 needs reliable per-line cost data. <strong>MISys+QB:</strong> possible via QB Class tracking + manual rollup. <strong>Acumatica:</strong> native dimensions, on-demand. <strong>NetSuite:</strong> same as Acumatica, more mature reporting.</p></div>
+      <div class="detail-block"><h4>2. Lot, serial & UDI for FDA Class II devices</h4><p style="font-size:13px">Recall query: "every shipment that contained lot X." <strong>MISys+QB:</strong> requires manual stitching across the sync boundary. <strong>Acumatica/NetSuite:</strong> single report, end-to-end traceability.</p></div>
+      <div class="detail-block"><h4>3. ISO 13485 audit posture</h4><p style="font-size:13px">Auditors increasingly expect 21 CFR Part 11 audit trails. <strong>MISys+QB:</strong> needs separate validated QMS ($10K-$40K/yr). <strong>Acumatica:</strong> stronger native trail, embedded quality module reduces (not eliminates) QMS need. <strong>NetSuite:</strong> strongest validated story; widely deployed.</p></div>
+      <div class="detail-block"><h4>4. 53-country export complexity</h4><p style="font-size:13px">Multi-currency, country labeling, distributor portals. <strong>MISys+QB:</strong> workable for current scale. <strong>Acumatica:</strong> native multi-currency + portals. <strong>NetSuite:</strong> deepest international localizations.</p></div>
+      <div class="detail-block"><h4>5. Operational headroom (the hidden cost)</h4><p style="font-size:13px">Beyond features: how much overhead does the system absorb vs. create? <strong>MISys+QB:</strong> lowest software cost, highest hidden cost in spreadsheet labor. <strong>Acumatica:</strong> higher software cost, lower hidden cost. <strong>NetSuite:</strong> highest software cost, lowest hidden cost — but only past a certain operating size.</p></div>
     </div>
+  </div>
+
+  <h3 style="margin-top:28px">Interactive 3-Year TCO Calculator</h3>
+  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Adjust the green inputs below. Outputs update in real-time. Estimates calibrated to Sleepnet's profile.</p>
+
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <h4 style="margin-bottom:12px; color:var(--sleepnet-navy)">Inputs</h4>
+        <div style="display:flex; flex-direction:column; gap:12px">
+          <label style="font-size:13px"><strong>Named ERP users:</strong> <input type="number" id="erpUsers" value="10" min="1" max="100" style="width:80px; padding:6px; border:1px solid var(--border); border-radius:6px; background:#EDFBE9; font-weight:700"></label>
+          <label style="font-size:13px"><strong>Shop-floor user logins:</strong> <input type="number" id="shopUsers" value="5" min="0" max="100" style="width:80px; padding:6px; border:1px solid var(--border); border-radius:6px; background:#EDFBE9; font-weight:700"></label>
+          <label style="font-size:13px"><strong>Annual transactions (orders + invoices):</strong> <input type="number" id="txns" value="5000" min="500" max="100000" step="500" style="width:100px; padding:6px; border:1px solid var(--border); border-radius:6px; background:#EDFBE9; font-weight:700"></label>
+          <label style="font-size:13px"><strong>Keep separate QMS?</strong> <select id="keepQMS" style="padding:6px; border:1px solid var(--border); border-radius:6px; background:#EDFBE9; font-weight:700"><option value="1" selected>Yes</option><option value="0">No</option></select></label>
+          <label style="font-size:13px"><strong>Annual QMS cost if kept ($):</strong> <input type="number" id="qmsCost" value="15000" min="0" max="100000" step="1000" style="width:110px; padding:6px; border:1px solid var(--border); border-radius:6px; background:#EDFBE9; font-weight:700"></label>
+          <label style="font-size:13px"><strong>Implementation complexity:</strong> <select id="complexity" style="padding:6px; border:1px solid var(--border); border-radius:6px; background:#EDFBE9; font-weight:700"><option value="0.7">Light (out-of-box)</option><option value="1" selected>Standard</option><option value="1.5">Heavy customization</option></select></label>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom:12px; color:var(--sleepnet-navy)">3-Year Total Cost of Ownership</h4>
+        <div class="chart-container" style="height:280px"><canvas id="tcoChart"></canvas></div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:24px">
+      <div class="stat-box"><div class="label">Stay (MISys+QB)</div><div class="value navy" id="tcoStay">$80K</div></div>
+      <div class="stat-box" style="background:var(--green-light)"><div class="label">Acumatica</div><div class="value green" id="tcoAcum">$218K</div></div>
+      <div class="stat-box" style="background:var(--blue-light)"><div class="label">NetSuite</div><div class="value blue" id="tcoNS">$436K</div></div>
+    </div>
+    <div style="margin-top:16px; padding:14px; background:#F8FAFB; border-radius:8px; font-size:12px; color:var(--text-secondary)">
+      <strong style="color:var(--sleepnet-navy)">Delta vs. staying:</strong> Acumatica = <span id="deltaAcum" style="color:#DC2626; font-weight:700">+$138K</span> over 3 years &nbsp;·&nbsp; NetSuite = <span id="deltaNS" style="color:#DC2626; font-weight:700">+$356K</span> over 3 years
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Decision Triggers</h3>
+  <p style="font-size:13px; color:var(--text-secondary); margin-bottom:12px">Rather than a recommendation: here are the conditions under which each path becomes the obvious choice.</p>
+
+  <div class="grid-3">
+    <div class="card card-blue" style="margin-bottom:0">
+      <h4 style="color:var(--sleepnet-navy); font-size:14px">STAY on MISys + QB if:</h4>
+      <ul style="font-size:12px; line-height:1.7; padding-left:18px; margin-top:10px">
+        <li>MISys is meeting current production needs</li>
+        <li>No 2nd legal entity / international sub planned in next 18 months</li>
+        <li>Recent ISO 13485 audits have been clean</li>
+        <li>Recall queries answered in FDA timeframes</li>
+        <li>Manual product-line P&L is reliable enough for strategic decisions</li>
+      </ul>
+    </div>
+    <div class="card card-green" style="margin-bottom:0">
+      <h4 style="color:#16A34A; font-size:14px">MOVE to Acumatica if:</h4>
+      <ul style="font-size:12px; line-height:1.7; padding-left:18px; margin-top:10px">
+        <li>Month-end close is chronic pain due to MISys/QB reconciliation</li>
+        <li>Recall queries take days because data is split across systems</li>
+        <li>ISO auditor flagged audit trail or production software change control</li>
+        <li>Tom or board needs product-line P&L on demand and manual rollup is too slow</li>
+        <li>Adding shop-floor users and per-user QB licensing is starting to bite</li>
+      </ul>
+    </div>
+    <div class="card card-orange" style="margin-bottom:0">
+      <h4 style="color:#D97706; font-size:14px">MOVE to NetSuite only if:</h4>
+      <ul style="font-size:12px; line-height:1.7; padding-left:18px; margin-top:10px">
+        <li>2nd legal entity, international sub, M&A on the roadmap</li>
+        <li>Country-specific localizations needed beyond bolt-ons</li>
+        <li>Sleepnet is or will be PE-backed</li>
+        <li>Appetite for 6-month implementation and 2-3x higher annual spend</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-accent" style="margin-top:24px">
+    <h3>Don't decide yet — collect data first if:</h3>
+    <ul style="font-size:13px; line-height:1.8; padding-left:20px; margin-top:8px">
+      <li>You haven't quantified hours/month lost to spreadsheet reconciliation. (2-3 weeks of time tracking by Ronnie + bookkeeper would settle this fast.)</li>
+      <li>The next ISO 13485 audit is more than 6 months away — let auditor findings inform the decision.</li>
+      <li>Tom hasn't committed to the strategic R&D reallocation question. The ERP decision cascades from that strategy.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:28px">One Operator's Honest Take</h3>
+  <div class="card" style="background:#F8FAFB; border-left:4px solid var(--fructify-accent)">
+    <p style="font-size:14px"><em>(Not a recommendation. A perspective from someone who has watched companies make this decision both well and badly.)</em></p>
+    <p style="font-size:14px; margin-top:12px">At $6M and 50 people, Sleepnet sits in the zone where the answer to "should we switch ERP?" is almost never "yes, urgently." It's almost always "yes eventually — and the question is whether the trigger is internal pain or external opportunity."</p>
+    <p style="font-size:14px; margin-top:12px">The ERP decision is downstream of two other decisions that should be made first:</p>
+    <ol style="font-size:14px; padding-left:24px; margin-top:8px; line-height:1.7">
+      <li><strong>The strategic R&D allocation question.</strong> Does Sleepnet commit to the Envo Pro + MiniMe2 thesis or keep spreading resources across all four lines?</li>
+      <li><strong>The next ISO 13485 audit posture.</strong> Will the auditor's expectations on electronic records tighten in 2026, and does the current bolt-on QMS arrangement still satisfy them?</li>
+    </ol>
+    <p style="font-size:14px; margin-top:12px">If both point the same direction ("focus the portfolio" + "auditor expects more"), then Acumatica becomes a clear conversation, not a leap. If neither has shifted, MISys + QB plus a strengthened QMS is defensible for another 18-24 months.</p>
+    <p style="font-size:14px; margin-top:12px">NetSuite is a different conversation entirely — the right answer if Sleepnet is about to be a different kind of company. None of those triggers are currently visible, so it's included here mostly so the question has been considered.</p>
+    <p style="font-size:14px; margin-top:12px"><strong>The decision is Sleepnet's.</strong> This section is meant to make the trade-offs visible, not to push a direction.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Companion Documents</h3>
+  <div class="grid-3">
+    <a href="Sleepnet_ERP_Executive_Brief.pdf" target="_blank" style="text-decoration:none">
+      <div class="opp-card">
+        <div class="badge badge-blue">PDF · 2 pages</div>
+        <h4 style="margin-top:8px; color:var(--sleepnet-navy)">Executive Brief</h4>
+        <p style="font-size:12px; color:var(--text-secondary); margin-top:6px">90-second forwardable summary for Tom and ownership.</p>
+      </div>
+    </a>
+    <a href="Sleepnet_ERP_Decision_Briefing.pdf" target="_blank" style="text-decoration:none">
+      <div class="opp-card">
+        <div class="badge badge-blue">PDF · 13 pages</div>
+        <h4 style="margin-top:8px; color:var(--sleepnet-navy)">Detailed Briefing</h4>
+        <p style="font-size:12px; color:var(--text-secondary); margin-top:6px">Full long-form analysis with feature matrix, TCO model, and decision framework.</p>
+      </div>
+    </a>
+    <a href="Sleepnet_ERP_Feature_Matrix.xlsx" target="_blank" style="text-decoration:none">
+      <div class="opp-card">
+        <div class="badge badge-green">XLSX · 3 sheets</div>
+        <h4 style="margin-top:8px; color:var(--sleepnet-navy)">Feature Matrix + TCO Model</h4>
+        <p style="font-size:12px; color:var(--text-secondary); margin-top:6px">48-row sortable feature matrix, editable 3-year TCO model, decision trigger checklist.</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="cta-banner" style="margin-top:24px">
+    <h3>Want to dig in further?</h3>
+    <p>Happy to walk through the calculator with your bookkeeper and CFO, scope a vendor demo, or model a hybrid path (e.g., add a validated QMS now, revisit Acumatica in 12 months). Just let me know.</p>
+    <p style="margin-top:14px"><strong>Mike Farley</strong> — Fructify Solutions · mfarley@fructifyme.com</p>
   </div>
 </div>
 
-</div><!-- end content -->
-
-<div style="background:var(--sleepnet-navy); color:white; padding:24px 40px; text-align:center; font-size:12px; opacity:0.7; margin-top:40px">
-  Prepared by Fructify Solutions × Claude Cowork | April 2026 | Breathe Easier. Live Better.
-</div>
-
-<script>
+<div class="section" id="sec-about"><h2>About This Assessment</h2><div class="card card-accent"><p style="font-size:14px; line-height:1.8">This strategic growth assessment was prepared by <strong>Fructify Solutions</strong> using Claude Cowork — an AI-powered workspace that combines real-time market research, competitive intelligence, financial modeling, and strategic analysis.</p><p style="font-size:14px; line-height:1.8; margin-top:12px">Every data point in this document is sourced from real market research: industry reports from Grand View Research, Mordor Intelligence, and Precedence Research; government procurement data from SAM.gov and GAO reports; competitive intelligence from public filings and product analysis; and SBIR/STTR grant databases.</p><p style="font-size:14px; line-height:1.8; margin-top:12px">What you're looking at is what a <strong>Fructify Cowork Kit</strong> produces. This entire assessment — the competitive analysis, the opportunity mapping, the financial projections, the action plans — was generated in a single working session. A kit built for Ronnie's specific role as Manufacturing Manager at Sleepnet would produce this kind of strategic intelligence on demand, every day.</p></div><div class="card" style="margin-top:16px"><h3>What a Cowork Kit Does</h3><p style="font-size:14px; margin-top:8px; line-height:1.7">A personalized AI workspace with custom skills for production tracking, quality analysis, supplier management, and strategic modeling — built around Sleepnet's specific products, competitors, and workflows. It's the difference between a general-purpose tool and one that knows your business.</p><div style="margin-top:16px"><p style="font-size:14px"><strong>Mike Molton</strong> — Fructify Solutions</p><p style="font-size:13px; color:var(--text-secondary)">fructifyme@gmail.com</p></div></div></div></div><!-- end content --><div style="background:var(--sleepnet-navy); color:white; padding:24px 40px; text-align:center; font-size:12px; opacity:0.7; margin-top:40px"> Prepared by Fructify Solutions × Claude Cowork | April 2026 | Breathe Easier. Live Better.
+</div><script>
 // ── Navigation ──
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('sec-' + id).classList.add('active');
-  event.target.classList.add('active');
-  window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
-}
-
-// ── R&D Chart ──
-new Chart(document.getElementById('rdChart'), {
-  type: 'bar',
-  data: {
-    labels: ['MiniMe2\nPediatric', 'Envo Pro\nIndustrial', 'Adult\nCPAP', 'NIV\nHospital'],
-    datasets: [
-      { label: 'R&D Spend ($K)', data: [150, 200, 350, 100], backgroundColor: ['#58CB45','#2E75B6','#E74C3C','#F39C12'], borderRadius: 6 },
-      { label: 'Moat Score (/100)', data: [85, 70, 20, 45], backgroundColor: ['#58CB4540','#2E75B640','#E74C3C40','#F39C1240'], borderRadius: 6 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { labels: { font: { family: 'Montserrat' } } } },
-    scales: { y: { beginAtZero: true, ticks: { font: { family: 'Montserrat', size: 11 } } }, x: { ticks: { font: { family: 'Montserrat', size: 11 } } } }
-  }
-});
-
-// ── Opportunities ──
-const opps = [
-  { name: 'VR/AR Face Interfaces', fit: 88, market: 82, time: '6-10 mo', risk: 'Low-Med', icon: '🥽', cat: 'Tech', color: '#7C3AED', why: 'Sleepnet makes precision gel face seals. VR headsets need precision gel face seals. Nobody in the aftermarket uses medical-grade gel. $5B accessory market growing 30%+.' },
-  { name: 'VA CPAP Supply', fit: 90, market: 88, time: '8-14 mo', risk: 'Medium', icon: '🏥', cat: 'Government', color: '#2E75B6', why: 'VA spent $2B on sleep apnea over 8 years. 1.4M veterans use CPAP. 21% prevalence. American-made = 30% price preference. Sleepnet just needs to get on the contract vehicle.' },
-  { name: 'SBIR/STTR Grants', fit: 95, market: 55, time: '3-6 mo', risk: 'Low', icon: '💰', cat: 'Grants', color: '#16A34A', why: 'Bleep LLC won $1.7M from NIH for CPAP comfort interface — literally what Sleepnet does. Phase I: $150-275K. Phase II: $1-2M. Zero equity dilution.' },
-  { name: 'Contract Manufacturing', fit: 90, market: 70, time: '3-6 mo', risk: 'Low', icon: '🏭', cat: 'Manufacturing', color: '#0D9488', why: 'Sleep tech startups raised $200M+ in 2024-2025. SleepRes got FDA clearance, launching H1 2026. XII Medical raised $45M. They all need manufacturers. Sleepnet has FDA cleanroom and NIOSH certs.' },
-  { name: 'Neonatal CPAP Masks', fit: 92, market: 85, time: '12-18 mo', risk: 'Medium', icon: '👶', cat: 'Medical', color: '#58CB45', why: 'Extend MiniMe2 down to ages 0-2. NICU market $3.1B by 2032. AIR°gel reduces pressure on fragile neonatal skin. Direct capability transfer.' },
-  { name: 'Wildfire Respirators', fit: 78, market: 80, time: '12-24 mo', risk: 'Med-High', icon: '🔥', cat: 'Industrial', color: '#EA580C', why: 'Federal policy reversed in 2025 to allow respirators for wildland firefighters. Multi-hour wear = comfort is everything. Envo Pro base + wildfire mods.' },
-  { name: 'Cannabis Facility Masks', fit: 85, market: 65, time: '6-12 mo', risk: 'Low-Med', icon: '🌿', cat: 'Industrial', color: '#16A34A', why: '40+ legal states. OSHA-compliant respirators required. 8-12 hour shifts in hot, humid grow rooms. No dominant supplier. Envo Pro is ready.' },
-  { name: 'AIR°gel IP Licensing', fit: 95, market: 75, time: '6-9 mo', risk: 'Low', icon: '📜', cat: 'Licensing', color: '#7C3AED', why: 'License gel tech to larger manufacturers for applications Sleepnet won\'t pursue. 5-15% royalty. Zero manufacturing overhead. Approach HFNO makers, wound care companies.' },
-  { name: 'Prosthetic Limb Interfaces', fit: 82, market: 70, time: '18 mo', risk: 'Medium', icon: '🦿', cat: 'Medical', color: '#2563EB', why: 'Where prosthetics meet skin = major comfort/pressure problem. Medical-grade gel liners are standard but innovation is slow. Sleepnet\'s precision gel molding transfers directly.' },
-  { name: 'Motorcycle Seat Gel', fit: 72, market: 70, time: '10 mo', risk: 'Low', icon: '🏍️', cat: 'Consumer', color: '#D97706', why: 'Gel seat pads are a proven aftermarket category. Luimoto, OnlyGel, SaddleGel sell at premium prices. Sleepnet\'s gel handles temp extremes. Fragmented market.' },
-];
-
-const oppGrid = document.getElementById('oppGrid');
-opps.forEach((o, i) => {
-  const div = document.createElement('div');
-  div.className = 'opp-card';
-  div.id = 'opp-' + i;
-  div.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-      <div><span style="font-size:18px;margin-right:6px">${o.icon}</span><strong style="font-size:14px">${o.name}</strong></div>
-      <span class="badge" style="background:${o.color}18;color:${o.color}">${o.fit}% fit</span>
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:8px">
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">Market: ${o.market}/100</span>
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${o.time}</span>
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${o.risk} risk</span>
-    </div>
-    <div id="opp-detail-${i}" style="display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:4px">
-      <p style="font-size:13px;color:var(--text-secondary);line-height:1.6">${o.why}</p>
-    </div>`;
-  div.onclick = () => {
-    const det = document.getElementById('opp-detail-' + i);
-    const isOpen = det.style.display !== 'none';
-    document.querySelectorAll('[id^=opp-detail-]').forEach(d => d.style.display = 'none');
-    document.querySelectorAll('.opp-card').forEach(c => c.classList.remove('expanded'));
-    if (!isOpen) { det.style.display = 'block'; div.classList.add('expanded'); }
-  };
-  oppGrid.appendChild(div);
-});
-
-// ── Fit Chart ──
-new Chart(document.getElementById('fitChart'), {
-  type: 'bar',
-  data: {
-    labels: opps.map(o => o.name.length > 18 ? o.name.substring(0,16) + '…' : o.name),
-    datasets: [{ label: 'Capability Fit Score', data: opps.map(o => o.fit), backgroundColor: opps.map(o => o.fit >= 85 ? '#58CB45' : o.fit >= 70 ? '#2E75B6' : '#F39C12'), borderRadius: 4 }]
-  },
-  options: {
-    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: { x: { max: 100, ticks: { font: { family: 'Montserrat', size: 10 } } }, y: { ticks: { font: { family: 'Montserrat', size: 11 } } } }
-  }
-});
-
-// ── Verticals ──
-const verts = [
-  { id: 'vr', icon: '🥽', name: 'VR/AR Interfaces', color: '#7C3AED', y1: '$1–3M', margin: '60-65%', time: '6-10 mo', invest: '$25-75K',
-    summary: 'The VR/AR aftermarket face interface market is $60-120M annually, growing 30%+ CAGR. Companies like VR Cover and Kiwi Design (1M+ units sold) use foam and consumer silicone. Nobody uses medical-grade gel. Sleepnet\'s liquid injection molding of medical-grade silicone transfers directly. Enterprise VR training (Walmart trains 1M+ employees) has a severe hygiene problem. VR fitness users sweat through foam in minutes.',
-    why: 'Medical-grade gel > consumer silicone for comfort, durability, and hygiene. Better pressure distribution (no red marks), antimicrobial washability for enterprise, and "Made in USA" premium. Tooling: ~$15K per headset SKU. Gross margin: 60-65%.',
-    contacts: 'Meta Partnership Team (Made for Meta) · VR Cover (white-label) · Walmart VR Training procurement · Kiwi Design (distribution)' },
-  { id: 'va', icon: '🏥', name: 'VA CPAP Supply', color: '#2E75B6', y1: '$500K–1M', margin: '35-45%', time: '8-14 mo', invest: '$10-20K',
-    summary: 'VA spent $2B on sleep apnea supplies (2016-2023). 1.4M veterans received PAP devices. Sleep apnea prevalence in veterans is 21% — more than double the 9% civilian rate. VA centralized procurement through 6 IDIQ contracts in 2021. Buy American Act gives Sleepnet a 30% price preference.',
-    why: 'Small business set-asides + American-made + Philips recall trust vacuum. VA Schedule 65 II A is an open, continuous solicitation — no deadline. VHA Innovation Network runs pilot programs at 33 sites. CPAP compliance at VA is 49-57% — AIR°gel comfort could improve that.',
-    contacts: 'VA OPAL (nac@va.gov) · VHA Innovators Network · First Nation Group (VA distributor) · Aeroflow Sleep (DME)' },
-  { id: 'grants', icon: '💰', name: 'SBIR/STTR Grants', color: '#16A34A', y1: '$150–225K', margin: '100% funded', time: '3-6 mo', invest: '$5-10K',
-    summary: 'SBIR/STTR grants fund small business R&D with zero equity dilution. The precedent is proven: Bleep LLC won $1.7M from NIH for CPAP mask comfort interface development — the exact thing Sleepnet manufactures. NIOSH co-sponsors occupational safety grants. NASA has space suit comfort topics.',
-    why: 'Existing FDA/NIOSH certs prove capability. 35-year track record. Proprietary AIR°gel IP. NIH omnibus solicitation (PA-24-245) accepts continuous submissions. NSF Phase I: $275K. NASA Phase I: $150-200K. Sleepnet\'s commercialization pathway is what reviewers want to see.',
-    contacts: 'NIH NHLBI Program Officer · NIOSH SBIR Program Manager · NSF Medical Devices Director · SBIR.gov assistance' },
-  { id: 'cmo', icon: '🏭', name: 'Contract Manufacturing', color: '#0D9488', y1: '$500K–1.5M', margin: '25-30%', time: '3-6 mo', invest: '$15-25K',
-    summary: 'Medical device CMO market is $87B growing 12%+ annually. Top 10 hold only 24.9% share — massive fragmentation. Large CMOs (Jabil, Flex) chase 100K+ unit volumes. Sleep tech startups raised $200M+ in 2024-2025. SleepRes just got FDA clearance for Kricket PAP, launching H1 2026.',
-    why: 'NIOSH certification (rare for CMOs) + FDA compliance already in place + small-batch flexibility. Northeast location near Boston biotech corridor. The big CMOs won\'t touch 1,000-unit prototype runs — Sleepnet will.',
-    contacts: 'SleepRes Inc (Kricket PAP, launching H1 2026) · XII Medical ($45M Series B) · Eight Sleep ($100M funding) · Vivos Therapeutics (NASDAQ: VVOS) · Apex Medical Corp (60 countries)' },
-];
-
-const vertTabs = document.getElementById('vertTabs');
+function showSection(id) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active')); document.getElementById('sec-' + id).classList.add('active'); event.target.classList.add('active'); window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
+} // ── R&D Chart ──
+new Chart(document.getElementById('rdChart'), { type: 'bar', data: { labels: ['MiniMe2\nPediatric', 'Envo Pro\nIndustrial', 'Adult\nCPAP', 'NIV\nHospital'], datasets: [ { label: 'R&D Spend ($K)', data: [150, 200, 350, 100], backgroundColor: ['#58CB45','#2E75B6','#E74C3C','#F39C12'], borderRadius: 6 }, { label: 'Moat Score (/100)', data: [85, 70, 20, 45], backgroundColor: ['#58CB4540','#2E75B640','#E74C3C40','#F39C1240'], borderRadius: 6 } ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { family: 'Montserrat' } } } }, scales: { y: { beginAtZero: true, ticks: { font: { family: 'Montserrat', size: 11 } } }, x: { ticks: { font: { family: 'Montserrat', size: 11 } } } } }
+}); // ── Opportunities ──
+const opps = [ { name: 'VR/AR Face Interfaces', fit: 88, market: 82, time: '6-10 mo', risk: 'Low-Med', icon: '🥽', cat: 'Tech', color: '#7C3AED', why: 'Sleepnet makes precision gel face seals. VR headsets need precision gel face seals. Nobody in the aftermarket uses medical-grade gel. $5B accessory market growing 30%+.' }, { name: 'VA CPAP Supply', fit: 90, market: 88, time: '8-14 mo', risk: 'Medium', icon: '🏥', cat: 'Government', color: '#2E75B6', why: 'VA spent $2B on sleep apnea over 8 years. 1.4M veterans use CPAP. 21% prevalence. American-made = 30% price preference. Sleepnet just needs to get on the contract vehicle.' }, { name: 'SBIR/STTR Grants', fit: 95, market: 55, time: '3-6 mo', risk: 'Low', icon: '💰', cat: 'Grants', color: '#16A34A', why: 'Bleep LLC won $1.7M from NIH for CPAP comfort interface — literally what Sleepnet does. Phase I: $150-275K. Phase II: $1-2M. Zero equity dilution.' }, { name: 'Contract Manufacturing', fit: 90, market: 70, time: '3-6 mo', risk: 'Low', icon: '🏭', cat: 'Manufacturing', color: '#0D9488', why: 'Sleep tech startups raised $200M+ in 2024-2025. SleepRes got FDA clearance, launching H1 2026. XII Medical raised $45M. They all need manufacturers. Sleepnet has FDA cleanroom and NIOSH certs.' }, { name: 'Neonatal CPAP Masks', fit: 92, market: 85, time: '12-18 mo', risk: 'Medium', icon: '👶', cat: 'Medical', color: '#58CB45', why: 'Extend MiniMe2 down to ages 0-2. NICU market $3.1B by 2032. AIR°gel reduces pressure on fragile neonatal skin. Direct capability transfer.' }, { name: 'Wildfire Respirators', fit: 78, market: 80, time: '12-24 mo', risk: 'Med-High', icon: '🔥', cat: 'Industrial', color: '#EA580C', why: 'Federal policy reversed in 2025 to allow respirators for wildland firefighters. Multi-hour wear = comfort is everything. Envo Pro base + wildfire mods.' }, { name: 'Cannabis Facility Masks', fit: 85, market: 65, time: '6-12 mo', risk: 'Low-Med', icon: '🌿', cat: 'Industrial', color: '#16A34A', why: '40+ legal states. OSHA-compliant respirators required. 8-12 hour shifts in hot, humid grow rooms. No dominant supplier. Envo Pro is ready.' }, { name: 'AIR°gel IP Licensing', fit: 95, market: 75, time: '6-9 mo', risk: 'Low', icon: '📜', cat: 'Licensing', color: '#7C3AED', why: 'License gel tech to larger manufacturers for applications Sleepnet won\'t pursue. 5-15% royalty. Zero manufacturing overhead. Approach HFNO makers, wound care companies.' }, { name: 'Prosthetic Limb Interfaces', fit: 82, market: 70, time: '18 mo', risk: 'Medium', icon: '🦿', cat: 'Medical', color: '#2563EB', why: 'Where prosthetics meet skin = major comfort/pressure problem. Medical-grade gel liners are standard but innovation is slow. Sleepnet\'s precision gel molding transfers directly.' }, { name: 'Motorcycle Seat Gel', fit: 72, market: 70, time: '10 mo', risk: 'Low', icon: '🏍️', cat: 'Consumer', color: '#D97706', why: 'Gel seat pads are a proven aftermarket category. Luimoto, OnlyGel, SaddleGel sell at premium prices. Sleepnet\'s gel handles temp extremes. Fragmented market.' },
+]; const oppGrid = document.getElementById('oppGrid');
+opps.forEach((o, i) => { const div = document.createElement('div'); div.className = 'opp-card'; div.id = 'opp-' + i; div.innerHTML = ` <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div><span style="font-size:18px;margin-right:6px">${o.icon}</span><strong style="font-size:14px">${o.name}</strong></div><span class="badge" style="background:${o.color}18;color:${o.color}">${o.fit}% fit</span></div><div style="display:flex;gap:8px;margin-bottom:8px"><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">Market: ${o.market}/100</span><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${o.time}</span><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${o.risk} risk</span></div><div id="opp-detail-${i}" style="display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:4px"><p style="font-size:13px;color:var(--text-secondary);line-height:1.6">${o.why}</p></div>`; div.onclick = () => { const det = document.getElementById('opp-detail-' + i); const isOpen = det.style.display !== 'none'; document.querySelectorAll('[id^=opp-detail-]').forEach(d => d.style.display = 'none'); document.querySelectorAll('.opp-card').forEach(c => c.classList.remove('expanded')); if (!isOpen) { det.style.display = 'block'; div.classList.add('expanded'); } }; oppGrid.appendChild(div);
+}); // ── Fit Chart ──
+new Chart(document.getElementById('fitChart'), { type: 'bar', data: { labels: opps.map(o => o.name.length > 18 ? o.name.substring(0,16) + '…' : o.name), datasets: [{ label: 'Capability Fit Score', data: opps.map(o => o.fit), backgroundColor: opps.map(o => o.fit >= 85 ? '#58CB45' : o.fit >= 70 ? '#2E75B6' : '#F39C12'), borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { max: 100, ticks: { font: { family: 'Montserrat', size: 10 } } }, y: { ticks: { font: { family: 'Montserrat', size: 11 } } } } }
+}); // ── Verticals ──
+const verts = [ { id: 'vr', icon: '🥽', name: 'VR/AR Interfaces', color: '#7C3AED', y1: '$1–3M', margin: '60-65%', time: '6-10 mo', invest: '$25-75K', summary: 'The VR/AR aftermarket face interface market is $60-120M annually, growing 30%+ CAGR. Companies like VR Cover and Kiwi Design (1M+ units sold) use foam and consumer silicone. Nobody uses medical-grade gel. Sleepnet\'s liquid injection molding of medical-grade silicone transfers directly. Enterprise VR training (Walmart trains 1M+ employees) has a severe hygiene problem. VR fitness users sweat through foam in minutes.', why: 'Medical-grade gel > consumer silicone for comfort, durability, and hygiene. Better pressure distribution (no red marks), antimicrobial washability for enterprise, and "Made in USA" premium. Tooling: ~$15K per headset SKU. Gross margin: 60-65%.', contacts: 'Meta Partnership Team (Made for Meta) · VR Cover (white-label) · Walmart VR Training procurement · Kiwi Design (distribution)' }, { id: 'va', icon: '🏥', name: 'VA CPAP Supply', color: '#2E75B6', y1: '$500K–1M', margin: '35-45%', time: '8-14 mo', invest: '$10-20K', summary: 'VA spent $2B on sleep apnea supplies (2016-2023). 1.4M veterans received PAP devices. Sleep apnea prevalence in veterans is 21% — more than double the 9% civilian rate. VA centralized procurement through 6 IDIQ contracts in 2021. Buy American Act gives Sleepnet a 30% price preference.', why: 'Small business set-asides + American-made + Philips recall trust vacuum. VA Schedule 65 II A is an open, continuous solicitation — no deadline. VHA Innovation Network runs pilot programs at 33 sites. CPAP compliance at VA is 49-57% — AIR°gel comfort could improve that.', contacts: 'VA OPAL (nac@va.gov) · VHA Innovators Network · First Nation Group (VA distributor) · Aeroflow Sleep (DME)' }, { id: 'grants', icon: '💰', name: 'SBIR/STTR Grants', color: '#16A34A', y1: '$150–225K', margin: '100% funded', time: '3-6 mo', invest: '$5-10K', summary: 'SBIR/STTR grants fund small business R&D with zero equity dilution. The precedent is proven: Bleep LLC won $1.7M from NIH for CPAP mask comfort interface development — the exact thing Sleepnet manufactures. NIOSH co-sponsors occupational safety grants. NASA has space suit comfort topics.', why: 'Existing FDA/NIOSH certs prove capability. 35-year track record. Proprietary AIR°gel IP. NIH omnibus solicitation (PA-24-245) accepts continuous submissions. NSF Phase I: $275K. NASA Phase I: $150-200K. Sleepnet\'s commercialization pathway is what reviewers want to see.', contacts: 'NIH NHLBI Program Officer · NIOSH SBIR Program Manager · NSF Medical Devices Director · SBIR.gov assistance' }, { id: 'cmo', icon: '🏭', name: 'Contract Manufacturing', color: '#0D9488', y1: '$500K–1.5M', margin: '25-30%', time: '3-6 mo', invest: '$15-25K', summary: 'Medical device CMO market is $87B growing 12%+ annually. Top 10 hold only 24.9% share — massive fragmentation. Large CMOs (Jabil, Flex) chase 100K+ unit volumes. Sleep tech startups raised $200M+ in 2024-2025. SleepRes just got FDA clearance for Kricket PAP, launching H1 2026.', why: 'NIOSH certification (rare for CMOs) + FDA compliance already in place + small-batch flexibility. Northeast location near Boston biotech corridor. The big CMOs won\'t touch 1,000-unit prototype runs — Sleepnet will.', contacts: 'SleepRes Inc (Kricket PAP, launching H1 2026) · XII Medical ($45M Series B) · Eight Sleep ($100M funding) · Vivos Therapeutics (NASDAQ: VVOS) · Apex Medical Corp (60 countries)' },
+]; const vertTabs = document.getElementById('vertTabs');
 const vertDetail = document.getElementById('vertDetail');
-let activeVert = 'vr';
-
-function renderVerts() {
-  vertTabs.innerHTML = '';
-  verts.forEach(v => {
-    const btn = document.createElement('div');
-    btn.className = 'vertical-tab' + (activeVert === v.id ? ' active' : '');
-    btn.innerHTML = `<span class="v-icon">${v.icon}</span><span class="v-name">${v.name}</span>`;
-    btn.onclick = () => { activeVert = v.id; renderVerts(); };
-    vertTabs.appendChild(btn);
-  });
-
-  const v = verts.find(x => x.id === activeVert);
-  vertDetail.innerHTML = `
-    <div class="card" style="border-left:4px solid ${v.color}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
-        <div><span style="font-size:24px;margin-right:8px">${v.icon}</span><span style="font-size:20px;font-weight:700;color:var(--sleepnet-navy)">${v.name}</span></div>
-      </div>
-      <div class="grid-4" style="margin-bottom:16px">
-        <div class="stat-box"><div class="label">Year 1 Revenue</div><div class="value green" style="font-size:16px">${v.y1}</div></div>
-        <div class="stat-box"><div class="label">Gross Margin</div><div class="value navy" style="font-size:16px">${v.margin}</div></div>
-        <div class="stat-box"><div class="label">Time to Revenue</div><div class="value" style="font-size:16px;color:#D97706">${v.time}</div></div>
-        <div class="stat-box"><div class="label">Investment</div><div class="value" style="font-size:16px;color:var(--text-secondary)">${v.invest}</div></div>
-      </div>
-      <div class="detail-block"><h4 style="color:var(--sleepnet-navy)">The Opportunity</h4><p style="font-size:13px;line-height:1.7">${v.summary}</p></div>
-      <div class="detail-block" style="background:${v.color}08"><h4 style="color:${v.color}">Why Sleepnet Wins</h4><p style="font-size:13px;line-height:1.7">${v.why}</p></div>
-      <div class="detail-block"><h4 style="color:var(--sleepnet-navy)">Key Contacts</h4><p style="font-size:13px;color:var(--text-secondary)">${v.contacts}</p></div>
-    </div>`;
+let activeVert = 'vr'; function renderVerts() { vertTabs.innerHTML = ''; verts.forEach(v => { const btn = document.createElement('div'); btn.className = 'vertical-tab' + (activeVert === v.id ? ' active' : ''); btn.innerHTML = `<span class="v-icon">${v.icon}</span><span class="v-name">${v.name}</span>`; btn.onclick = () => { activeVert = v.id; renderVerts(); }; vertTabs.appendChild(btn); }); const v = verts.find(x => x.id === activeVert); vertDetail.innerHTML = ` <div class="card" style="border-left:4px solid ${v.color}"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px"><div><span style="font-size:24px;margin-right:8px">${v.icon}</span><span style="font-size:20px;font-weight:700;color:var(--sleepnet-navy)">${v.name}</span></div></div><div class="grid-4" style="margin-bottom:16px"><div class="stat-box"><div class="label">Year 1 Revenue</div><div class="value green" style="font-size:16px">${v.y1}</div></div><div class="stat-box"><div class="label">Gross Margin</div><div class="value navy" style="font-size:16px">${v.margin}</div></div><div class="stat-box"><div class="label">Time to Revenue</div><div class="value" style="font-size:16px;color:#D97706">${v.time}</div></div><div class="stat-box"><div class="label">Investment</div><div class="value" style="font-size:16px;color:var(--text-secondary)">${v.invest}</div></div></div><div class="detail-block"><h4 style="color:var(--sleepnet-navy)">The Opportunity</h4><p style="font-size:13px;line-height:1.7">${v.summary}</p></div><div class="detail-block" style="background:${v.color}08"><h4 style="color:${v.color}">Why Sleepnet Wins</h4><p style="font-size:13px;line-height:1.7">${v.why}</p></div><div class="detail-block"><h4 style="color:var(--sleepnet-navy)">Key Contacts</h4><p style="font-size:13px;color:var(--text-secondary)">${v.contacts}</p></div></div>`;
 }
-renderVerts();
-
-// ── Revenue Chart ──
+renderVerts(); // ── Revenue Chart ──
 const months = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
-new Chart(document.getElementById('revenueChart'), {
-  type: 'bar',
-  data: {
-    labels: months,
-    datasets: [
-      { label: '🥽 VR/AR', data: [0,0,5,10,15,25,40,55,75,100,130,170], backgroundColor: '#7C3AED', borderRadius: 2 },
-      { label: '🏭 CMO', data: [0,5,15,25,35,40,50,60,75,90,100,120], backgroundColor: '#0D9488', borderRadius: 2 },
-      { label: '🏥 VA', data: [0,0,5,5,5,10,15,20,30,45,60,80], backgroundColor: '#2E75B6', borderRadius: 2 },
-      { label: '💰 Grants', data: [0,5,10,15,15,20,25,30,35,40,50,100], backgroundColor: '#16A34A', borderRadius: 2 },
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { labels: { font: { family: 'Montserrat', size: 11 } } } },
-    scales: {
-      x: { stacked: true, ticks: { font: { family: 'Montserrat', size: 11 } } },
-      y: { stacked: true, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$' + v + 'K' } }
-    }
-  }
+new Chart(document.getElementById('revenueChart'), { type: 'bar', data: { labels: months, datasets: [ { label: '🥽 VR/AR', data: [0,0,5,10,15,25,40,55,75,100,130,170], backgroundColor: '#7C3AED', borderRadius: 2 }, { label: '🏭 CMO', data: [0,5,15,25,35,40,50,60,75,90,100,120], backgroundColor: '#0D9488', borderRadius: 2 }, { label: '🏥 VA', data: [0,0,5,5,5,10,15,20,30,45,60,80], backgroundColor: '#2E75B6', borderRadius: 2 }, { label: '💰 Grants', data: [0,5,10,15,15,20,25,30,35,40,50,100], backgroundColor: '#16A34A', borderRadius: 2 }, ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { family: 'Montserrat', size: 11 } } } }, scales: { x: { stacked: true, ticks: { font: { family: 'Montserrat', size: 11 } } }, y: { stacked: true, ticks: { font: { family: 'Montserrat', size: 11 }, callback: v => '$' + v + 'K' } } } }
 });
 // ── Expansion Opportunities ──
-const expansions = [
-  { name: 'Sports Eyewear Partnerships', fit: 85, market: 90, tam: '$7–17B', cagr: '5–9%', time: '12–18 mo', risk: 'Medium', icon: '🎿', color: '#2563EB',
-    summary: 'The global sports eyewear market is $7–17B and growing 5–9% annually. Ski goggles alone hit $650M (9.6% CAGR). Swimming goggles: $2.3–5.7B. Every goggle uses a face-seal gasket — currently foam or basic silicone. No major OEM has integrated medical-grade gel as a branded feature. That\'s white space.',
-    why: 'AIR°gel creates 15% less strap pressure with better seal conformability. Medical-grade = hypoallergenic, sweat-resistant, durable. Smith Optics, POC, Speedo, and Safilo Group all have proven licensing models (8–12% royalty). A single Tier 1 partner at 500K units/year × $10–15/unit royalty = $5–7.5M annually.',
-    contacts: 'Smith Optics (ski goggles leader, innovation-focused) · POC Sweden (safety-first brand) · Speedo/Arena (swim goggles) · Safilo Group (32 licensed brands) · Oakley/Luxottica (scale play)',
-    entry: 'Component licensing: supply AIR°gel cushion gaskets to OEMs. Branded co-marketing: "AIR°gel Technology by Sleepnet." Target Smith Optics first — premium, nimble, innovation-driven.' },
+const expansions = [ { name: 'Sports Eyewear Partnerships', fit: 85, market: 90, tam: '$7–17B', cagr: '5–9%', time: '12–18 mo', risk: 'Medium', icon: '🎿', color: '#2563EB', summary: 'The global sports eyewear market is $7–17B and growing 5–9% annually. Ski goggles alone hit $650M (9.6% CAGR). Swimming goggles: $2.3–5.7B. Every goggle uses a face-seal gasket — currently foam or basic silicone. No major OEM has integrated medical-grade gel as a branded feature. That\'s white space.', why: 'AIR°gel creates 15% less strap pressure with better seal conformability. Medical-grade = hypoallergenic, sweat-resistant, durable. Smith Optics, POC, Speedo, and Safilo Group all have proven licensing models (8–12% royalty). A single Tier 1 partner at 500K units/year × $10–15/unit royalty = $5–7.5M annually.', contacts: 'Smith Optics (ski goggles leader, innovation-focused) · POC Sweden (safety-first brand) · Speedo/Arena (swim goggles) · Safilo Group (32 licensed brands) · Oakley/Luxottica (scale play)', entry: 'Component licensing: supply AIR°gel cushion gaskets to OEMs. Branded co-marketing: "AIR°gel Technology by Sleepnet." Target Smith Optics first — premium, nimble, innovation-driven.' }, { name: 'Firefighting Equipment', fit: 82, market: 88, tam: '$2.1–3.2B', cagr: '5–5.9%', time: '18–24 mo', risk: 'Med-High', icon: '🚒', color: '#DC2626', summary: 'Firefighter PPE market: $2.1B (2024) → $3.2B (2033). Respiratory protection is the fastest-growing subsegment at 5.9% CAGR. SCBA (breathing apparatus) masks have a well-documented comfort crisis: 50% of F-16 pilots on similar masks report nasal cartilage damage. Firefighters face the same pressure injury problem during 20–30+ minute structural fire deployments.', why: 'The beard-seal problem is critical — facial hair reduces seal effectiveness 50–1,000×. Advanced gel cushioning could improve seal even with facial hair (expanding the recruitment pool). Heat management: silicone gel outperforms foam in thermal environments. MSA Safety, Honeywell, 3M Scott, Avon Protection are all potential licensees.', contacts: 'MSA Safety (market leader, 25–30% share) · Honeywell (IoT-enabled SCBA) · 3M Scott Safety (Air-Pak XD, launched April 2025) · Avon Protection (ST54 multi-mission) · FEMA AFG grant program', entry: 'License AIR°gel as SCBA facepiece cushion upgrade. Co-develop with MSA or Avon. FEMA Assistance to Firefighters Grant program funds ~1,500+ departments annually for equipment purchases.' }, { name: 'Earbud Comfort Tips', fit: 78, market: 85, tam: '$165B+', cagr: '19%', time: '6–12 mo', risk: 'Low-Med', icon: '🎧', color: '#8B5CF6', summary: 'TWS earbuds: $166B market growing 19% annually, 0.5B units shipped in 2026. The #1 complaint is comfort/fit — 95% of fit problems stem from incorrect sizing, 70% of discomfort from tips too large creating ear canal pressure. Aftermarket tips (Comply, SpinFit, Dekoni) are a proven premium segment ($15–40/pair).', why: 'Medical-grade silicone gel distributes pressure better than foam or standard silicone. Sleep earbuds (Bose, QuietOn, Amazfit) need ultra-soft tips for 6–8 hour wear — AIR°gel\'s sweet spot. Custom-molded premium segment pays $80–150+ per set. Eartune Fidelity already proved medical-grade silicone commands premium pricing.', contacts: 'Comply (foam tip market leader) · SpinFit (patented rotating core) · Bose/Ozlo (sleep earbuds) · QuietOn (ANC sleep) · Apple AirPods aftermarket channel', entry: 'Launch "AIR°gel Comfort Tips" as premium aftermarket product ($25–40/pair). Target sleep earbud niche first — highest willingness to pay for comfort. Amazon FBA + audiophile community seeding.' }, { name: 'Pet Respiratory Products', fit: 75, market: 72, tam: '$350M–1.9B', cagr: '6–7.2%', time: '12–18 mo', risk: 'Medium', icon: '🐾', color: '#F59E0B', summary: 'Veterinary masks market: $350M → $550M by 2033. Pet oxygen mask kits deployed to 3,000+ fire departments via Wag\'N O2 program. The brachycephalic breed crisis (French Bulldogs, Pugs) affects 50+ per 10,000 dog-years — BOAS reduces lifespan by 4+ years. Zero commercial pet CPAP products exist. That\'s a first-mover opportunity.', why: 'Medical-grade gel is already proven safe for prolonged skin contact. Custom-moldable for animal muzzle shapes. Fire/rescue pet oxygen masks currently leak 90% with human masks — gel-sealed pet-specific masks solve this. Veterinary anesthesia recovery for brachycephalic breeds needs helmet CPAP interfaces.', contacts: 'Wag\'N O2 Fur Life (6,700+ kits distributed) · PureVent Pet Oxygen Project (2026 launch) · Pawprint Oxygen · Veterinary Emergency Group (VEG) · French Bulldog breed clubs', entry: 'Start with fire/rescue pet oxygen masks (high mission value, emotional appeal, existing distribution via Wag\'N O2). Phase 2: veterinary anesthesia interfaces. Phase 3: brachycephalic breed respiratory aids.' }, { name: 'Health & Beauty Devices', fit: 80, market: 86, tam: '$275M–770M', cagr: '11–13.5%', time: '8–14 mo', risk: 'Low-Med', icon: '✨', color: '#EC4899', summary: 'LED light therapy mask market: $275M (2024) → $770M (2030) at 13.5% CAGR. At-home beauty devices overall: $20–77B. The #1 consumer complaint on every LED mask: uncomfortable fit. Pressure marks, poor seal, one-size-fits-all limitations. CurrentBody, Omnilux, Dr. Dennis Gross all struggle with this.', why: 'Medical-grade silicone gel is already FDA-approved for skin contact and proven to boost collagen production. Gel cushioning solves the fit/comfort problem that limits treatment session duration and repeat use. B2B OEM model: supply face-interface components to LED mask brands. Also applies to post-surgical compression masks (Marena, Macom).', contacts: 'CurrentBody (flexible silicone masks, Series 2) · Omnilux (medical heritage) · Therabody · FOREO · Marena Medical (post-surgical) · Macom Medical', entry: 'OEM component supplier model: sell AIR°gel face cushion inserts to beauty device brands. "Powered by AIR°gel" co-branding. Also pursue cooling/heating gel sleep masks as direct-to-consumer product.' }, { name: 'Aviation Oxygen Masks', fit: 88, market: 92, tam: '$1.5–7.6B', cagr: '6–7.5%', time: '12–24 mo', risk: 'Med-High', icon: '✈️', color: '#0369A1', summary: 'Aircraft oxygen mask market: $1.5B (2024) → $2.8B (2033). Full aircraft oxygen systems: $7.6B by 2034. The military angle is strongest: 50% of F-16 fighter pilots report nasal integument and cartilage damage from MBU-20/P oxygen masks. Research shows optimized gel cushioning reduces facial contact pressure 11–33% and discomfort 33–56%.', why: 'Fighter pilot mask injuries are a documented, published problem with no current solution. Gentex Corporation is the sole MBU-20/P supplier — a co-development partnership is the entry point. General aviation aftermarket (200K+ US aircraft) is fastest entry: no AS9100 required, sell replacement cushions through Aerox/Sporty\'s/Pilot John.', contacts: 'Gentex Corporation (MBU-20/P sole supplier) · Safran Aerosystems (EROS® crew masks) · Collins Aerospace (military + commercial) · Aerox Aviation (general aviation aftermarket) · USAF Life Support office', entry: 'Phase 1: General aviation aftermarket cushions (6–12 mo, no cert needed). Phase 2: Gentex co-development for MBU-20/P variant + SBIR grant ($150–275K). Phase 3: Safran licensing for commercial crew masks. AS9100 certification in parallel ($15–50K, 6–12 mo).' }, { name: 'Anti-Pollution Masks', fit: 83, market: 80, tam: '$9.7–10B', cagr: '38%', time: '6–12 mo', risk: 'Low-Med', icon: '😷', color: '#059669', summary: 'Anti-pollution mask market: $9.7B (2024), growing at an explosive 38.4% CAGR. Asia Pacific dominates at 38.7% share. China alone: 22.4% of global replaceable pollution mask market. Urban health-conscious consumers demanding comfort + style + filtration. Airinum (Sweden) just launched smart masks with air quality sensors.', why: 'Current masks prioritize filtration but fail on comfort for daily 8+ hour wear. AIR°gel face seal solves the #1 drop-off reason: discomfort. Reusable elastomeric design (like Envo Pro) is the industry direction. Licensing to Airinum, Vogmask, or Cambridge Mask Co. as a premium comfort component.', contacts: 'Airinum AB (Sweden, smart masks) · Vogmask (reusable focus) · Cambridge Mask Co. (clinical backing) · Respro (cycling masks) · AirPop (design-forward)', entry: 'License AIR°gel cushion technology to existing brands or launch Sleepnet-branded premium anti-pollution mask. Asian market entry via existing 53-country export network. NH Exporter of the Year credential opens doors.' }, { name: 'Welding & Industrial PPE', fit: 76, market: 74, tam: '$3.5B+', cagr: '6–8%', time: '8–14 mo', risk: 'Low', icon: '⚡', color: '#B45309', summary: 'Welding helmets and industrial face protection: $3.5B+ market. Welders wear helmets 8+ hours/day — comfort directly impacts safety compliance (uncomfortable helmet = helmet removed = injury). Current face cushions are basic foam rubber with minimal innovation in decades. Athletic training masks ($200M+) have similar comfort gaps.', why: 'Drop-in replacement gel cushion pads for existing welding helmets. Zero regulatory barrier. Flame-retardant medical-grade silicone meets industrial safety requirements. Same approach works for hard hat suspension pads, face shields, and athletic training masks (Phantom Athletics, Training Mask).', contacts: 'Lincoln Electric · Miller (ITW) · ESAB · 3M Speedglas · Black Stallion · Phantom Athletics (training masks) · Training Mask Inc.', entry: 'Aftermarket replacement cushion pads — sell through welding supply distributors (Airgas, Praxair, local welding shops). Amazon FBA for direct-to-consumer. Lowest barrier to entry of any vertical.' },
+]; const expansionGrid = document.getElementById('expansionGrid');
+expansions.forEach((e, i) => { const div = document.createElement('div'); div.className = 'opp-card'; div.id = 'exp-' + i; div.innerHTML = ` <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div><span style="font-size:20px;margin-right:6px">${e.icon}</span><strong style="font-size:14px">${e.name}</strong></div><span class="badge" style="background:${e.color}18;color:${e.color}">${e.fit}% fit</span></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">TAM: ${e.tam}</span><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${e.cagr} CAGR</span><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${e.time}</span><span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${e.risk} risk</span></div><div id="exp-detail-${i}" style="display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:4px"><div class="detail-block"><h4 style="color:var(--sleepnet-navy)">The Opportunity</h4><p style="font-size:13px;line-height:1.7;color:var(--text-secondary)">${e.summary}</p></div><div class="detail-block" style="background:${e.color}08"><h4 style="color:${e.color}">Why Sleepnet Wins</h4><p style="font-size:13px;line-height:1.7;color:var(--text-secondary)">${e.why}</p></div><div class="detail-block"><h4 style="color:var(--sleepnet-navy)">Key Contacts</h4><p style="font-size:12px;color:var(--text-secondary)">${e.contacts}</p></div><div class="detail-block"><h4 style="color:var(--sleepnet-navy)">Entry Strategy</h4><p style="font-size:13px;line-height:1.7;color:var(--text-secondary)">${e.entry}</p></div></div>`; div.onclick = () => { const det = document.getElementById('exp-detail-' + i); const isOpen = det.style.display !== 'none'; document.querySelectorAll('[id^=exp-detail-]').forEach(d => d.style.display = 'none'); document.querySelectorAll('#expansionGrid .opp-card').forEach(c => c.classList.remove('expanded')); if (!isOpen) { det.style.display = 'block'; div.classList.add('expanded'); } }; expansionGrid.appendChild(div);
+}); // ── Expansion Fit Chart ──
+new Chart(document.getElementById('expansionFitChart'), { type: 'bar', data: { labels: expansions.map(e => e.name), datasets: [ { label: 'Capability Fit', data: expansions.map(e => e.fit), backgroundColor: expansions.map(e => e.fit >= 85 ? '#58CB45' : e.fit >= 75 ? '#2E75B6' : '#F39C12'), borderRadius: 4 }, { label: 'Market Potential', data: expansions.map(e => e.market), backgroundColor: expansions.map(e => e.color + '50'), borderRadius: 4 } ] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { family: 'Montserrat', size: 11 } } } }, scales: { x: { max: 100, ticks: { font: { family: 'Montserrat', size: 10 } } }, y: { ticks: { font: { family: 'Montserrat', size: 11 } } } } }
+}); // ── TAM Chart ──
+new Chart(document.getElementById('tamChart'), { type: 'bar', data: { labels: ['Sports\nEyewear', 'Fire\nEquip', 'Earbuds', 'Pet\nResp', 'Beauty\nDevices', 'Aviation\nO2', 'Anti-\nPollution', 'Welding\nPPE'], datasets: [{ label: 'TAM ($ Billions)', data: [12, 2.6, 165, 1.1, 0.5, 4.5, 10, 3.5], backgroundColor: expansions.map(e => e.color), borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { font: { family: 'Montserrat', size: 10 }, callback: v => '$' + v + 'B' } }, x: { ticks: { font: { family: 'Montserrat', size: 10 } } } } }
+}); 
 
-  { name: 'Firefighting Equipment', fit: 82, market: 88, tam: '$2.1–3.2B', cagr: '5–5.9%', time: '18–24 mo', risk: 'Med-High', icon: '🚒', color: '#DC2626',
-    summary: 'Firefighter PPE market: $2.1B (2024) → $3.2B (2033). Respiratory protection is the fastest-growing subsegment at 5.9% CAGR. SCBA (breathing apparatus) masks have a well-documented comfort crisis: 50% of F-16 pilots on similar masks report nasal cartilage damage. Firefighters face the same pressure injury problem during 20–30+ minute structural fire deployments.',
-    why: 'The beard-seal problem is critical — facial hair reduces seal effectiveness 50–1,000×. Advanced gel cushioning could improve seal even with facial hair (expanding the recruitment pool). Heat management: silicone gel outperforms foam in thermal environments. MSA Safety, Honeywell, 3M Scott, Avon Protection are all potential licensees.',
-    contacts: 'MSA Safety (market leader, 25–30% share) · Honeywell (IoT-enabled SCBA) · 3M Scott Safety (Air-Pak XD, launched April 2025) · Avon Protection (ST54 multi-mission) · FEMA AFG grant program',
-    entry: 'License AIR°gel as SCBA facepiece cushion upgrade. Co-develop with MSA or Avon. FEMA Assistance to Firefighters Grant program funds ~1,500+ departments annually for equipment purchases.' },
+// ── TCO Calculator ──
+let tcoChart = null;
+function calcTCO() {
+  const u = parseFloat(document.getElementById('erpUsers').value) || 10;
+  const sf = parseFloat(document.getElementById('shopUsers').value) || 5;
+  const tx = parseFloat(document.getElementById('txns').value) || 5000;
+  const keepQMS = parseFloat(document.getElementById('keepQMS').value);
+  const qms = parseFloat(document.getElementById('qmsCost').value) || 15000;
+  const cx = parseFloat(document.getElementById('complexity').value) || 1;
 
-  { name: 'Earbud Comfort Tips', fit: 78, market: 85, tam: '$165B+', cagr: '19%', time: '6–12 mo', risk: 'Low-Med', icon: '🎧', color: '#8B5CF6',
-    summary: 'TWS earbuds: $166B market growing 19% annually, 0.5B units shipped in 2026. The #1 complaint is comfort/fit — 95% of fit problems stem from incorrect sizing, 70% of discomfort from tips too large creating ear canal pressure. Aftermarket tips (Comply, SpinFit, Dekoni) are a proven premium segment ($15–40/pair).',
-    why: 'Medical-grade silicone gel distributes pressure better than foam or standard silicone. Sleep earbuds (Bose, QuietOn, Amazfit) need ultra-soft tips for 6–8 hour wear — AIR°gel\'s sweet spot. Custom-molded premium segment pays $80–150+ per set. Eartune Fidelity already proved medical-grade silicone commands premium pricing.',
-    contacts: 'Comply (foam tip market leader) · SpinFit (patented rotating core) · Bose/Ozlo (sleep earbuds) · QuietOn (ANC sleep) · Apple AirPods aftermarket channel',
-    entry: 'Launch "AIR°gel Comfort Tips" as premium aftermarket product ($25–40/pair). Target sleep earbud niche first — highest willingness to pay for comfort. Amazon FBA + audiophile community seeding.' },
+  // Stay = MISys per-user + QB seats + QMS
+  const stayY1 = (u * 40 * 12) + 2400 + (keepQMS * qms) + 5000;
+  const stayY2 = (u * 40 * 12) + 2400 + (keepQMS * qms);
+  const stay3yr = stayY1 + stayY2 * 2;
 
-  { name: 'Pet Respiratory Products', fit: 75, market: 72, tam: '$350M–1.9B', cagr: '6–7.2%', time: '12–18 mo', risk: 'Medium', icon: '🐾', color: '#F59E0B',
-    summary: 'Veterinary masks market: $350M → $550M by 2033. Pet oxygen mask kits deployed to 3,000+ fire departments via Wag\'N O2 program. The brachycephalic breed crisis (French Bulldogs, Pugs) affects 50+ per 10,000 dog-years — BOAS reduces lifespan by 4+ years. Zero commercial pet CPAP products exist. That\'s a first-mover opportunity.',
-    why: 'Medical-grade gel is already proven safe for prolonged skin contact. Custom-moldable for animal muzzle shapes. Fire/rescue pet oxygen masks currently leak 90% with human masks — gel-sealed pet-specific masks solve this. Veterinary anesthesia recovery for brachycephalic breeds needs helmet CPAP interfaces.',
-    contacts: 'Wag\'N O2 Fur Life (6,700+ kits distributed) · PureVent Pet Oxygen Project (2026 launch) · Pawprint Oxygen · Veterinary Emergency Group (VEG) · French Bulldog breed clubs',
-    entry: 'Start with fire/rescue pet oxygen masks (high mission value, emotional appeal, existing distribution via Wag\'N O2). Phase 2: veterinary anesthesia interfaces. Phase 3: brachycephalic breed respiratory aids.' },
+  // Acumatica = resource-based + transactions + impl + QMS at half + training
+  const acumLicense = Math.max(25000, u * 250 + tx * 2);
+  const acumImpl = (60000 + 8000 + (u * 600) + 15000) * cx;
+  const acumY1 = acumLicense + acumImpl + (keepQMS * qms * 0.5);
+  const acumY2 = acumLicense + (keepQMS * qms * 0.5);
+  const acum3yr = acumY1 + acumY2 * 2;
 
-  { name: 'Health & Beauty Devices', fit: 80, market: 86, tam: '$275M–770M', cagr: '11–13.5%', time: '8–14 mo', risk: 'Low-Med', icon: '✨', color: '#EC4899',
-    summary: 'LED light therapy mask market: $275M (2024) → $770M (2030) at 13.5% CAGR. At-home beauty devices overall: $20–77B. The #1 consumer complaint on every LED mask: uncomfortable fit. Pressure marks, poor seal, one-size-fits-all limitations. CurrentBody, Omnilux, Dr. Dennis Gross all struggle with this.',
-    why: 'Medical-grade silicone gel is already FDA-approved for skin contact and proven to boost collagen production. Gel cushioning solves the fit/comfort problem that limits treatment session duration and repeat use. B2B OEM model: supply face-interface components to LED mask brands. Also applies to post-surgical compression masks (Marena, Macom).',
-    contacts: 'CurrentBody (flexible silicone masks, Series 2) · Omnilux (medical heritage) · Therabody · FOREO · Marena Medical (post-surgical) · Macom Medical',
-    entry: 'OEM component supplier model: sell AIR°gel face cushion inserts to beauty device brands. "Powered by AIR°gel" co-branding. Also pursue cooling/heating gel sleep masks as direct-to-consumer product.' },
+  // NetSuite = base + per user + impl + small QMS + training
+  const nsLicense = 11988 + u * 1788;
+  const nsImpl = (120000 + 15000 + (u * 1200) + 25000) * cx;
+  const nsY1 = nsLicense + nsImpl + (keepQMS * qms * 0.2);
+  const nsY2 = nsLicense + (keepQMS * qms * 0.2);
+  const ns3yr = nsY1 + nsY2 * 2;
 
-  { name: 'Aviation Oxygen Masks', fit: 88, market: 92, tam: '$1.5–7.6B', cagr: '6–7.5%', time: '12–24 mo', risk: 'Med-High', icon: '✈️', color: '#0369A1',
-    summary: 'Aircraft oxygen mask market: $1.5B (2024) → $2.8B (2033). Full aircraft oxygen systems: $7.6B by 2034. The military angle is strongest: 50% of F-16 fighter pilots report nasal integument and cartilage damage from MBU-20/P oxygen masks. Research shows optimized gel cushioning reduces facial contact pressure 11–33% and discomfort 33–56%.',
-    why: 'Fighter pilot mask injuries are a documented, published problem with no current solution. Gentex Corporation is the sole MBU-20/P supplier — a co-development partnership is the entry point. General aviation aftermarket (200K+ US aircraft) is fastest entry: no AS9100 required, sell replacement cushions through Aerox/Sporty\'s/Pilot John.',
-    contacts: 'Gentex Corporation (MBU-20/P sole supplier) · Safran Aerosystems (EROS® crew masks) · Collins Aerospace (military + commercial) · Aerox Aviation (general aviation aftermarket) · USAF Life Support office',
-    entry: 'Phase 1: General aviation aftermarket cushions (6–12 mo, no cert needed). Phase 2: Gentex co-development for MBU-20/P variant + SBIR grant ($150–275K). Phase 3: Safran licensing for commercial crew masks. AS9100 certification in parallel ($15–50K, 6–12 mo).' },
+  const fmt = v => '$' + Math.round(v / 1000) + 'K';
+  document.getElementById('tcoStay').textContent = fmt(stay3yr);
+  document.getElementById('tcoAcum').textContent = fmt(acum3yr);
+  document.getElementById('tcoNS').textContent = fmt(ns3yr);
+  document.getElementById('deltaAcum').textContent = '+' + fmt(acum3yr - stay3yr);
+  document.getElementById('deltaNS').textContent = '+' + fmt(ns3yr - stay3yr);
 
-  { name: 'Anti-Pollution Masks', fit: 83, market: 80, tam: '$9.7–10B', cagr: '38%', time: '6–12 mo', risk: 'Low-Med', icon: '😷', color: '#059669',
-    summary: 'Anti-pollution mask market: $9.7B (2024), growing at an explosive 38.4% CAGR. Asia Pacific dominates at 38.7% share. China alone: 22.4% of global replaceable pollution mask market. Urban health-conscious consumers demanding comfort + style + filtration. Airinum (Sweden) just launched smart masks with air quality sensors.',
-    why: 'Current masks prioritize filtration but fail on comfort for daily 8+ hour wear. AIR°gel face seal solves the #1 drop-off reason: discomfort. Reusable elastomeric design (like Envo Pro) is the industry direction. Licensing to Airinum, Vogmask, or Cambridge Mask Co. as a premium comfort component.',
-    contacts: 'Airinum AB (Sweden, smart masks) · Vogmask (reusable focus) · Cambridge Mask Co. (clinical backing) · Respro (cycling masks) · AirPop (design-forward)',
-    entry: 'License AIR°gel cushion technology to existing brands or launch Sleepnet-branded premium anti-pollution mask. Asian market entry via existing 53-country export network. NH Exporter of the Year credential opens doors.' },
-
-  { name: 'Welding & Industrial PPE', fit: 76, market: 74, tam: '$3.5B+', cagr: '6–8%', time: '8–14 mo', risk: 'Low', icon: '⚡', color: '#B45309',
-    summary: 'Welding helmets and industrial face protection: $3.5B+ market. Welders wear helmets 8+ hours/day — comfort directly impacts safety compliance (uncomfortable helmet = helmet removed = injury). Current face cushions are basic foam rubber with minimal innovation in decades. Athletic training masks ($200M+) have similar comfort gaps.',
-    why: 'Drop-in replacement gel cushion pads for existing welding helmets. Zero regulatory barrier. Flame-retardant medical-grade silicone meets industrial safety requirements. Same approach works for hard hat suspension pads, face shields, and athletic training masks (Phantom Athletics, Training Mask).',
-    contacts: 'Lincoln Electric · Miller (ITW) · ESAB · 3M Speedglas · Black Stallion · Phantom Athletics (training masks) · Training Mask Inc.',
-    entry: 'Aftermarket replacement cushion pads — sell through welding supply distributors (Airgas, Praxair, local welding shops). Amazon FBA for direct-to-consumer. Lowest barrier to entry of any vertical.' },
-];
-
-const expansionGrid = document.getElementById('expansionGrid');
-expansions.forEach((e, i) => {
-  const div = document.createElement('div');
-  div.className = 'opp-card';
-  div.id = 'exp-' + i;
-  div.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-      <div><span style="font-size:20px;margin-right:6px">${e.icon}</span><strong style="font-size:14px">${e.name}</strong></div>
-      <span class="badge" style="background:${e.color}18;color:${e.color}">${e.fit}% fit</span>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">TAM: ${e.tam}</span>
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${e.cagr} CAGR</span>
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${e.time}</span>
-      <span style="font-size:11px;background:#F8FAFB;padding:3px 8px;border-radius:6px">${e.risk} risk</span>
-    </div>
-    <div id="exp-detail-${i}" style="display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:4px">
-      <div class="detail-block"><h4 style="color:var(--sleepnet-navy)">The Opportunity</h4><p style="font-size:13px;line-height:1.7;color:var(--text-secondary)">${e.summary}</p></div>
-      <div class="detail-block" style="background:${e.color}08"><h4 style="color:${e.color}">Why Sleepnet Wins</h4><p style="font-size:13px;line-height:1.7;color:var(--text-secondary)">${e.why}</p></div>
-      <div class="detail-block"><h4 style="color:var(--sleepnet-navy)">Key Contacts</h4><p style="font-size:12px;color:var(--text-secondary)">${e.contacts}</p></div>
-      <div class="detail-block"><h4 style="color:var(--sleepnet-navy)">Entry Strategy</h4><p style="font-size:13px;line-height:1.7;color:var(--text-secondary)">${e.entry}</p></div>
-    </div>`;
-  div.onclick = () => {
-    const det = document.getElementById('exp-detail-' + i);
-    const isOpen = det.style.display !== 'none';
-    document.querySelectorAll('[id^=exp-detail-]').forEach(d => d.style.display = 'none');
-    document.querySelectorAll('#expansionGrid .opp-card').forEach(c => c.classList.remove('expanded'));
-    if (!isOpen) { det.style.display = 'block'; div.classList.add('expanded'); }
-  };
-  expansionGrid.appendChild(div);
-});
-
-// ── Expansion Fit Chart ──
-new Chart(document.getElementById('expansionFitChart'), {
-  type: 'bar',
-  data: {
-    labels: expansions.map(e => e.name),
+  const data = {
+    labels: ['Year 1', 'Year 2', 'Year 3'],
     datasets: [
-      { label: 'Capability Fit', data: expansions.map(e => e.fit), backgroundColor: expansions.map(e => e.fit >= 85 ? '#58CB45' : e.fit >= 75 ? '#2E75B6' : '#F39C12'), borderRadius: 4 },
-      { label: 'Market Potential', data: expansions.map(e => e.market), backgroundColor: expansions.map(e => e.color + '50'), borderRadius: 4 }
+      { label: 'Stay (MISys+QB)', data: [stayY1, stayY1 + stayY2, stay3yr], borderColor: '#162A50', backgroundColor: '#162A5020', borderWidth: 3, tension: 0.3, fill: false },
+      { label: 'Acumatica', data: [acumY1, acumY1 + acumY2, acum3yr], borderColor: '#58CB45', backgroundColor: '#58CB4520', borderWidth: 3, tension: 0.3, fill: false },
+      { label: 'NetSuite', data: [nsY1, nsY1 + nsY2, ns3yr], borderColor: '#2E75B6', backgroundColor: '#2E75B620', borderWidth: 3, tension: 0.3, fill: false }
     ]
-  },
-  options: {
-    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { labels: { font: { family: 'Montserrat', size: 11 } } } },
-    scales: { x: { max: 100, ticks: { font: { family: 'Montserrat', size: 10 } } }, y: { ticks: { font: { family: 'Montserrat', size: 11 } } } }
+  };
+  if (tcoChart) {
+    tcoChart.data = data;
+    tcoChart.update();
+  } else {
+    tcoChart = new Chart(document.getElementById('tcoChart'), {
+      type: 'line', data,
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { font: { family: 'Montserrat', size: 11 } } }, tooltip: { callbacks: { label: c => c.dataset.label + ': $' + Math.round(c.parsed.y / 1000) + 'K' } } },
+        scales: { y: { beginAtZero: true, ticks: { font: { family: 'Montserrat', size: 10 }, callback: v => '$' + Math.round(v / 1000) + 'K' } }, x: { ticks: { font: { family: 'Montserrat', size: 11 } } } }
+      }
+    });
+  }
+}
+['erpUsers', 'shopUsers', 'txns', 'keepQMS', 'qmsCost', 'complexity'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calcTCO);
+});
+// Initial render — but only when the section becomes visible
+const erpObserver = new MutationObserver(() => {
+  if (document.getElementById('sec-erp').classList.contains('active') && !tcoChart) {
+    setTimeout(calcTCO, 100);
   }
 });
-
-// ── TAM Chart ──
-new Chart(document.getElementById('tamChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Sports\nEyewear', 'Fire\nEquip', 'Earbuds', 'Pet\nResp', 'Beauty\nDevices', 'Aviation\nO2', 'Anti-\nPollution', 'Welding\nPPE'],
-    datasets: [{ label: 'TAM ($ Billions)', data: [12, 2.6, 165, 1.1, 0.5, 4.5, 10, 3.5], backgroundColor: expansions.map(e => e.color), borderRadius: 4 }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: { y: { ticks: { font: { family: 'Montserrat', size: 10 }, callback: v => '$' + v + 'B' } }, x: { ticks: { font: { family: 'Montserrat', size: 10 } } } }
-  }
-});
-
-</script>
-</body>
-</html>
+erpObserver.observe(document.getElementById('sec-erp'), { attributes: true, attributeFilter: ['class'] });
+// Also render once on load in case it's already active or to pre-warm
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setTimeout(() => { if (document.getElementById('erpUsers')) calcTCO(); }, 200);
+}
+</script></body></html>
